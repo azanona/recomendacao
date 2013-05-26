@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+	<persistence-unit name="recomendacao-ds" transaction-type="RESOURCE_LOCAL">
+		
+		<!-- Entidades App -->
+		
+		<class>br.com.zanona.tcc.recserver.domain.Acompanhante</class>
+		<class>br.com.zanona.tcc.recserver.domain.AtrativoTuristico</class>
+		<class>br.com.zanona.tcc.recserver.domain.Categoria</class>
+		<class>br.com.zanona.tcc.recserver.domain.Escolaridade</class>
+		<class>br.com.zanona.tcc.recserver.domain.EstadoCivil</class>
+		<class>br.com.zanona.tcc.recserver.domain.GastoViagem</class>
+		
+		<class>br.com.zanona.tcc.recserver.domain.Hospedagem</class>
+		<class>br.com.zanona.tcc.recserver.domain.LocalTrabalho</class>
+		<class>br.com.zanona.tcc.recserver.domain.MeioTransporte</class>
+		<class>br.com.zanona.tcc.recserver.domain.Perfil</class>
+		<class>br.com.zanona.tcc.recserver.domain.PeriodicidadeVisita</class>
+		<class>br.com.zanona.tcc.recserver.domain.Recomendacao</class>
+		<class>br.com.zanona.tcc.recserver.domain.RoteiroTuristico</class>
+		<class>br.com.zanona.tcc.recserver.domain.TempoEstadia</class>
+		<class>br.com.zanona.tcc.recserver.domain.TransporteEvento</class>
+		
+		<!-- Configuracoes JPA2/Hibernate -->
+		
+		<properties>			
+			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+			<property name="hibernate.default_schema" value="public" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/recomendacao" />
+						
+			<property name="javax.persistence.jdbc.user" value="arthur" />
+			<property name="javax.persistence.jdbc.password" value="arthur" />
+			
+			<property name="hibernate.dialect" value="org.hibernatespatial.postgis.PostgisDialect" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			
+		</properties>
+
+	</persistence-unit>
+
+</persistence>
