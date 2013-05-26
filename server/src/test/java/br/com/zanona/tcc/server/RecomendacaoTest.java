@@ -28,7 +28,7 @@ public class RecomendacaoTest {
 	
 	@Test
 	public void recomendarRoteiroSemCompromisso() throws Exception {
-		Perfil perfil = perfilBC.load(10);
+		Perfil perfil = new Perfil(); //perfilBC.load(10);
 		List<Recomendacao> recomendacao = recomBC.executar(perfil, false);
 		log.info(recomendacao.toString());
 	}

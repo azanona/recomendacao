@@ -75,7 +75,7 @@ public class GeracaoCasosTest {
 	private LocalTrabalhoDAO localTrabalhoDAO;
 	
 	@Inject
-	private EstadoCivilDAO estadoCivelDAO;
+	private EstadoCivilDAO estadoCivilDAO;
 	
 	@Inject
 	private GastoViagemDAO gastoViagemDAO;
@@ -127,7 +127,7 @@ public class GeracaoCasosTest {
 		destinoAleatorio = carregarDestinos(nomesAleatorios.length);
 		escolaridades = escolaridadeDAO.findAll();
 		locaisTrabalho = localTrabalhoDAO.findAll();
-		estadosCivis = estadoCivelDAO.findAll();
+		estadosCivis = estadoCivilDAO.findAll();
 		gastosViagem = gastoViagemDAO.findAll();
 		acompanhantes = acompanhanteDAO.findAll();
 		hospedagens = hospedagemDAO.findAll();
