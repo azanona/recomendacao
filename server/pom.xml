@@ -109,12 +109,10 @@
 			<version>2.3.0</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<scope>test</scope>
-		</dependency>
+	
 	</dependencies>
+
+
 
 	<build>
 		<finalName>recomendacao</finalName>
