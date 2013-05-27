@@ -16,8 +16,8 @@
 
 	<parent>
 		<groupId>br.gov.frameworkdemoiselle</groupId>
-		<artifactId>demoiselle-jsf-parent</artifactId>
-		<version>2.3.3</version>
+		<artifactId>demoiselle-web-parent</artifactId>
+		<version>2.2.2</version>
 	</parent>
 
 	<dependencies>
@@ -106,10 +106,9 @@
 		<dependency>
 			<groupId>br.gov.frameworkdemoiselle.component</groupId>
 			<artifactId>demoiselle-junit</artifactId>
-			<version>2.3.0</version>
 			<scope>test</scope>
 		</dependency>
-	
+
 	</dependencies>
 
 
