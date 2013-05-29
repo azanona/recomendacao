@@ -11,5 +11,17 @@
     <string name="portaServidor">Porta do servidor</string>
     <string name="salvar">Salvar</string>
     <string name="cancelar">Cancelar</string>
-
+    <string name="nome">Nome</string>
+    <string name="sexo">Sexo</string>
+    <string name="idade">Idade</string>
+    <string name="escolaridade">Escolaridade</string>
+    <string name="localtrabalho">Local trabalho</string>
+    <string name="estadocivil">Estado civil</string>
+    <string name="gastoviagem">Gasto viagem</string>
+    <string name="acompanhante">Acompanhante</string>
+    <string name="hospedagem">Hospedagem</string>
+    <string name="transporteevento">Transporte evento</string>
+    <string name="meiotransporte">Meio transporte</string>
+    <string name="periodicidadevisita">Periodicidade visita</string>
+    <string name="tempoestadia">Tempo estadia</string>
 </resources>
