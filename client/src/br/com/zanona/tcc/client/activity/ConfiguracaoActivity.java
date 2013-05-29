@@ -47,7 +47,10 @@ public class ConfiguracaoActivity extends Activity {
 		final EditText txtEndereco = (EditText) findViewById(R.id.txtEnderecoServidor);
 		final EditText txtPorta = (EditText) findViewById(R.id.txtPortaServidor);
 		sr.setEndereco(txtEndereco.getText().toString());
-		sr.setPorta( Integer.valueOf( txtPorta.getText().toString() ) );
+		String strPorta = txtPorta.getText().toString();
+		strPorta = strPorta.isEmpty() ? "8080" : strPorta;
+		
+		sr.setPorta( Integer.valueOf( strPorta ) );
 		return sr;
 	}
 	
