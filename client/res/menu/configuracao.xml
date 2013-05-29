@@ -1,8 +1,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/confirmar"
-        android:title="@string/confirmar"/>
-    
+        android:id="@+id/salvar"
+        android:title="@string/salvar"/>
+   
    
 </menu>

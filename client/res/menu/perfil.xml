@@ -4,6 +4,8 @@
         android:id="@+id/buscar"
         android:title="@string/buscar_recomendacao"/>
     
-   
+   <item
+        android:id="@+id/cancelar"
+        android:title="@string/cancelar"/>
    
 </menu>
