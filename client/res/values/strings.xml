@@ -3,6 +3,9 @@
 
     <string name="app_name">Roterizador</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
-
+    <string name="buscar_recomendacao">Recomendar</string>
+	<string name="configurar">Configurar</string>
+	<string name="ipServidor">Endereço IP</string>confirmarconfirmar
+	<string name="limpar_recomendacao">Limpar</string>
+	<string name="confirmar">Confirmar</string>
 </resources>
