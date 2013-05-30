@@ -1,11 +1,13 @@
 package br.com.zanona.tcc.server.business;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import br.com.zanona.tcc.server.domain.Acompanhante;
+import br.com.zanona.tcc.server.domain.BaseDomain;
 import br.com.zanona.tcc.server.domain.Escolaridade;
 import br.com.zanona.tcc.server.domain.EstadoCivil;
 import br.com.zanona.tcc.server.domain.GastoViagem;
@@ -13,6 +15,7 @@ import br.com.zanona.tcc.server.domain.Hospedagem;
 import br.com.zanona.tcc.server.domain.LocalTrabalho;
 import br.com.zanona.tcc.server.domain.MeioTransporte;
 import br.com.zanona.tcc.server.domain.PeriodicidadeVisita;
+import br.com.zanona.tcc.server.domain.Sexo;
 import br.com.zanona.tcc.server.domain.TempoEstadia;
 import br.com.zanona.tcc.server.domain.TransporteEvento;
 import br.com.zanona.tcc.server.persistence.AcompanhanteDAO;
@@ -100,6 +103,13 @@ public class PerfilBC implements Serializable {
 
 	public List<TempoEstadia> buscarTemposEstadia() {
 		return tempoEstadiaDAO.findAll();
+	}
+
+	public List<BaseDomain> buscarSexo() {
+		return Arrays.asList(new BaseDomain[]{
+			new BaseDomain( 1 , Sexo.MASCULINO.toString() ),
+			new BaseDomain( 2 , Sexo.FEMININO.toString() )
+		});
 	}
 
 }

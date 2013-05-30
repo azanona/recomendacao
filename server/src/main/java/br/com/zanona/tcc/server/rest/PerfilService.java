@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 
 import br.com.zanona.tcc.server.business.PerfilBC;
 import br.com.zanona.tcc.server.domain.Acompanhante;
+import br.com.zanona.tcc.server.domain.BaseDomain;
 import br.com.zanona.tcc.server.domain.Escolaridade;
 import br.com.zanona.tcc.server.domain.EstadoCivil;
 import br.com.zanona.tcc.server.domain.GastoViagem;
@@ -17,6 +18,7 @@ import br.com.zanona.tcc.server.domain.Hospedagem;
 import br.com.zanona.tcc.server.domain.LocalTrabalho;
 import br.com.zanona.tcc.server.domain.MeioTransporte;
 import br.com.zanona.tcc.server.domain.PeriodicidadeVisita;
+import br.com.zanona.tcc.server.domain.Sexo;
 import br.com.zanona.tcc.server.domain.TempoEstadia;
 import br.com.zanona.tcc.server.domain.TransporteEvento;
 
@@ -26,6 +28,13 @@ public class PerfilService {
 	@Inject
 	private PerfilBC perfilBC;
 	
+	@GET
+	@Path("/sexo/") 
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<BaseDomain> sexos() {
+		return perfilBC.buscarSexo();
+	}
+
 	
 	@GET
 	@Path("/escolaridade/") 

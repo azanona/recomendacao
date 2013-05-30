@@ -1,4 +1,4 @@
-package br.com.zanona.tcc.client.domain;
+package br.com.zanona.tcc.server.domain;
 
 import java.io.Serializable;
 
@@ -9,6 +9,18 @@ import java.io.Serializable;
 public class BaseDomain implements Serializable {
 
 	private static final long serialVersionUID = 6467280137597675269L;
+
+	public BaseDomain() { }
+	
+	
+	
+	public BaseDomain(Integer id, String nome) {
+		super();
+		this.id = id;
+		this.nome = nome;
+	}
+
+
 
 	private Integer id;
 	private String nome;
