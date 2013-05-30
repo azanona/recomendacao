@@ -30,7 +30,7 @@ public class PerfilService {
 	
 	@GET
 	@Path("/sexo/") 
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces("application/json;charset=UTF-8")
 	public List<BaseDomain> sexos() {
 		return perfilBC.buscarSexo();
 	}
@@ -38,70 +38,70 @@ public class PerfilService {
 	
 	@GET
 	@Path("/escolaridade/") 
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces("application/json;charset=UTF-8")
 	public List<Escolaridade> escolaridades() {
 		return perfilBC.buscarEscolaridades();
 	}
 
 	@GET
 	@Path("/local-trabalho/") 
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces("application/json;charset=UTF-8")
 	public List<LocalTrabalho> locaisTrabalho() {
 		return perfilBC.buscarLocaisTrabalho();
 	}
 
 	@GET
 	@Path("/estado-civil/") 
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces("application/json;charset=UTF-8")
 	public List<EstadoCivil> estadosCivis() {
 		return perfilBC.buscarEstadosCivis();
 	}
 
 	@GET
 	@Path("/gasto-viagem/") 
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces("application/json;charset=UTF-8")
 	public List<GastoViagem> gastosViagem() {
 		return perfilBC.buscarGastosViagem();
 	}
 
 	@GET
 	@Path("/acompanhante/") 
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces("application/json;charset=UTF-8")
 	public List<Acompanhante> acompanhantes() {
 		return perfilBC.buscarAcompanhantes();
 	}
 	
 	@GET
 	@Path("/hospedagem/") 
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces("application/json;charset=UTF-8")
 	public List<Hospedagem> hospedagens() {
 		return perfilBC.buscarHospedagens();
 	}
 
 	@GET
 	@Path("/transporte-evento/") 
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces("application/json;charset=UTF-8")
 	public List<TransporteEvento> transportesEvento() {
 		return perfilBC.buscarTransportesEvento();
 	}
 
 	@GET
 	@Path("/meio-transporte/") 
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces("application/json;charset=UTF-8")
 	public List<MeioTransporte> meiosTransporte() {
 		return perfilBC.buscarMeiosTransporte();
 	}
 
 	@GET
 	@Path("/periodicidade-visita/") 
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces("application/json;charset=UTF-8")
 	public List<PeriodicidadeVisita> periodicidadesVisita() {
 		return perfilBC.buscarPeriodicidadesVisita();
 	}
 
 	@GET
 	@Path("/tempo-estadia/") 
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces("application/json;charset=UTF-8")
 	public List<TempoEstadia> temposEstadia() {
 		return perfilBC.buscarTemposEstadia();
 	}

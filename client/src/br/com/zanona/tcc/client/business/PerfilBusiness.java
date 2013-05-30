@@ -19,7 +19,7 @@ public class PerfilBusiness {
 	}
 	
 	/**
-	 * Método que efetua obtem uma lista de objetos BaseDomain
+	 * Método que obtem uma lista de objetos BaseDomain
 	 * @param path do recurso
 	 * @return
 	 */
