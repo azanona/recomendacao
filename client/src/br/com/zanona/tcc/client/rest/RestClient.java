@@ -1,4 +1,4 @@
-package br.com.zanona.tcc.client.business;
+package br.com.zanona.tcc.client.rest;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
@@ -16,19 +16,21 @@ import br.com.zanona.tcc.client.domain.ServidorRest;
 public class RestClient {
 
 	private ServidorRest servidor;
-	
-	public RestClient( ServidorRest servidor ) {
+
+	public RestClient(ServidorRest servidor) {
 		this.servidor = servidor;
 	}
-	
+
 	/**
 	 * Efetua uma requisição GET ao servidor.
+	 * 
 	 * @param pathService
 	 * @return
 	 * @throws Exception
 	 */
-	public String get( String pathService )  {
-		HttpHost target = new HttpHost(servidor.getEndereco(), servidor.getPorta());
+	public String get(String pathService) {
+		HttpHost target = new HttpHost(servidor.getEndereco(),
+				servidor.getPorta());
 		HttpClient client = new DefaultHttpClient();
 		HttpGet get = new HttpGet(pathService);
 		String result = null;
@@ -38,31 +40,33 @@ public class RestClient {
 			HttpEntity results = response.getEntity();
 			result = EntityUtils.toString(results);
 		} catch (Exception e) {
-			Log.e("RestClient", e.getMessage() );
+			Log.e("RestClient", e.getMessage());
 		}
-		
+
 		return result;
 	}
-	
+
 	/**
 	 * Efetua uma requisição POST ao servidor;
+	 * 
 	 * @param pathService
 	 * @param params
 	 * @throws Exception
 	 */
-	public void post( String pathService , String params ) throws Exception {
-		HttpHost target = new HttpHost(servidor.getEndereco(), servidor.getPorta());
+	public void post(String pathService, String params) throws Exception {
+		HttpHost target = new HttpHost(servidor.getEndereco(),
+				servidor.getPorta());
 		HttpClient client = new DefaultHttpClient();
 		HttpPost post = new HttpPost(pathService);
-		
+
 		HttpEntity entity = new StringEntity(params);
 		post.setEntity(entity);
-		
+
 		post.setHeader("Accept", "application/json");
 		post.setHeader("Content-type", "application/json");
-		
+
 		HttpResponse response = client.execute(target, post);
-		
+
 	}
-	
+
 }
