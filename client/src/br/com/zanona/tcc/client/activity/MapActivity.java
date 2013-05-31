@@ -10,27 +10,22 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import br.com.zanona.tcc.client.R;
 import br.com.zanona.tcc.client.constants.IntentConstants;
-import br.com.zanona.tcc.client.gps.GPSTracker;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapActivity extends FragmentActivity {
 
-	private GPSTracker gps;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.map);
-		gps  =  new GPSTracker(this);
-		
-		
-		getMap().addMarker(new MarkerOptions()
+		//gps  =  new GPSTracker(this);
+		/*getMap().addMarker(new MarkerOptions()
         .position(new LatLng(gps.getLatitude(), gps.getLongitude()))
-        .title(gps.getLatitude() + " @ " + gps.getLongitude() + " @ " + gps.getLocation() ));
+        .title(gps.getLatitude() + " @ " + gps.getLongitude() + " @ " + gps.getLocation() ));*/
 	}
 
 	/**

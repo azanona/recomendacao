@@ -1,7 +1,5 @@
 package br.com.zanona.tcc.client.rest;
 
-import java.io.UnsupportedEncodingException;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -19,12 +17,17 @@ public class RestClient {
 
 	private ServidorRest servidor;
 
+	private RestClient() {
+		this(new ServidorRest("192.168.1.134", 8080));
+	}
+
 	public RestClient(ServidorRest servidor) {
 		this.servidor = servidor;
 	}
 
+
 	public static RestClient getInstance() {
-		return new RestClient(new ServidorRest("192.168.1.125", 8080));
+		return new RestClient();
 	}
 
 	/**
@@ -67,7 +70,7 @@ public class RestClient {
 		String result = "";
 		HttpEntity entity;
 		try {
-			entity = new StringEntity(params);
+			entity = new StringEntity(params , "UTF-8");
 			post.setEntity(entity);
 
 			post.setHeader("Accept", "application/json");

@@ -22,8 +22,8 @@ public class RecomendacaoService {
 
 	@POST
 	@Path("/buscar")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes("application/json;charset=UTF-8")
+	@Produces("application/json;charset=UTF-8")
 	public Response buscar(Perfil perfil) {
 		List<Recomendacao> lstRecomendacao = null;
 		try {

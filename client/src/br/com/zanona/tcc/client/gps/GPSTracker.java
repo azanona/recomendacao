@@ -114,6 +114,10 @@ public class GPSTracker extends Service implements LocationListener {
         }       
     }
      
+    public String getWKT(){
+    	return "POINT(" + getLongitude() + " " + getLatitude() + ")";
+    }
+    
     /**
      * Function to get latitude
      * */

@@ -2,11 +2,13 @@ package br.com.zanona.tcc.client.facade;
 
 import java.util.List;
 
+import android.content.Context;
 import br.com.zanona.tcc.client.business.PerfilBusiness;
 import br.com.zanona.tcc.client.business.RoteiroTuristicoBusiness;
 import br.com.zanona.tcc.client.domain.BaseDomain;
 import br.com.zanona.tcc.client.domain.Perfil;
 import br.com.zanona.tcc.client.domain.RoteiroTuristico;
+import br.com.zanona.tcc.client.gps.GPSTracker;
 import br.com.zanona.tcc.client.rest.RestClient;
 
 public class RecomendacaoFacade {
@@ -68,6 +70,11 @@ public class RecomendacaoFacade {
 
 	public RoteiroTuristico buscarRecomendacao( Perfil perfil ){
 		return roteiroBusiness.buscarRecomendacao(perfil);
+	}
+	
+	public String getPosicaoGPS( Context context ) {
+		GPSTracker gps = new GPSTracker(context);
+		return gps.getWKT();
 	}
 	
 }

@@ -13,6 +13,12 @@ public class BaseDomain implements Serializable {
 	private Integer id;
 	private String nome;
 
+	public BaseDomain() { }
+	
+	public BaseDomain( Integer id ) { 
+		this.id = id;
+	}	
+	
 	public Integer getId() {
 		return id;
 	}

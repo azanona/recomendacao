@@ -22,6 +22,7 @@ public class PerfilActivity extends Activity {
 
 	private EditText txtNome;
 	private EditText txtIdade;
+	private EditText txtRenda;
 	private Spinner spnSexo;
 	private Spinner spnEscolaridade;
 	private Spinner spnLocalTrabalho;
@@ -61,6 +62,7 @@ public class PerfilActivity extends Activity {
 		spnTempoEstadia = (Spinner) findViewById(R.id.spnTempoEstadia);
 		txtNome = (EditText) findViewById(R.id.txtNome);
 		txtIdade = (EditText) findViewById(R.id.txtIdade);
+		txtRenda = (EditText) findViewById(R.id.txtRenda);
 	}
 
 	private void carregarDados() {
@@ -108,9 +110,36 @@ public class PerfilActivity extends Activity {
 		}
 	}
 
+	/**
+	 * Método que obtem o valor selecionado do spinner e cria um novo objeto apenas com seu id.
+	 * Motivo da gambis é que o post do resteasy nao aceita meus strings utf8 e como só preciso do id..
+	 * @param spinner
+	 * @return
+	 */
+	private BaseDomain getSelectedSpinner( Spinner spinner ) {
+		BaseDomain bd = (BaseDomain) spnAcompanhante.getSelectedItem();
+		BaseDomain bdNovo = new BaseDomain( bd.getId() );
+		return bdNovo;
+	}
+	
 	private Perfil toDomain() {
 		Perfil p = new Perfil();
 		p.setNome( txtNome.getText().toString() );
+		String wkt = facade.getPosicaoGPS(this);
+		p.setCoordenada( wkt );
+		//p.setSexo(sexo) //FIXME arruma essa coisa, pq no server é um enum..
+		p.setAcompanhante( getSelectedSpinner(spnAcompanhante)  );
+		p.setEscolaridade( getSelectedSpinner(spnEscolaridade) );
+		p.setEstadoCivil(getSelectedSpinner(spnEstadoCivil) );
+		p.setGastoViagem(getSelectedSpinner( spnGastoViagem));
+		p.setHospedagem(getSelectedSpinner( spnHospedagem));
+		p.setIdade( Integer.parseInt(txtIdade.getText().toString()) );
+		p.setLocalTrabalho(getSelectedSpinner( spnLocalTrabalho));
+		p.setMeioTransporte(getSelectedSpinner( spnMeioTransporte));
+		p.setPeriodicidadeVisita(getSelectedSpinner( spnPeriodicidade));
+		p.setRendaMensal( Float.parseFloat(txtRenda.getText().toString()) );
+		p.setTempoEstadia(getSelectedSpinner( spnTempoEstadia));
+		p.setTransporteEvento(getSelectedSpinner( spnTransporteEvento));
 		return p;
 	}
 }
