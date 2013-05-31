@@ -3,57 +3,79 @@ package br.com.zanona.tcc.client.business;
 import java.util.List;
 
 import br.com.zanona.tcc.client.domain.BaseDomain;
-import br.com.zanona.tcc.client.rest.DomainRestClient;
+import br.com.zanona.tcc.client.rest.RestClient;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class PerfilBusiness {
 
-	private DomainRestClient<BaseDomain> client;
+	private RestClient restClient;
 
-	public PerfilBusiness() {
-		this.client = new DomainRestClient<BaseDomain>();
+	public PerfilBusiness( RestClient restClient ) {
+		this.restClient = restClient;
 	}
 
-	public List<BaseDomain> sexos() {
-		return client.get_return_list("/recomendacao/perfil/sexo/");
+	public List<BaseDomain> buscarSexo() {
+		String strJson = restClient.get("/recomendacao/perfil/sexo/");
+		return toList(strJson);
 	}
 
-	public List<BaseDomain> escolaridades() {
-		return client.get_return_list("/recomendacao/perfil/escolaridade/");
+	public List<BaseDomain> buscarEscolaridade() {
+		String strJson = restClient.get("/recomendacao/perfil/escolaridade/");
+		return toList(strJson);
 	}
 
-	public List<BaseDomain> locaisTrabalho() {
-		return client.get_return_list("/recomendacao/perfil/local-trabalho/");
+	public List<BaseDomain> buscarLocalTrabalho() {
+		String strJson = restClient.get("/recomendacao/perfil/local-trabalho/");
+		return toList(strJson);
 	}
 
-	public List<BaseDomain> estadosCivis() {
-		return client.get_return_list("/recomendacao/perfil/estado-civil/");
+	public List<BaseDomain> buscarEstadoCivil() {
+		String strJson = restClient.get("/recomendacao/perfil/estado-civil/");
+		return toList(strJson);
 	}
 
-	public List<BaseDomain> gastosViagem() {
-		return client.get_return_list("/recomendacao/perfil/gasto-viagem/");
+	public List<BaseDomain> buscarGastoViagem() {
+		String strJson = restClient.get("/recomendacao/perfil/gasto-viagem/");
+		return toList(strJson);
 	}
 
-	public List<BaseDomain> acompanhantes() {
-		return client.get_return_list("/recomendacao/perfil/acompanhante/");
+	public List<BaseDomain> buscarAcompanhante() {
+		String strJson = restClient.get("/recomendacao/perfil/acompanhante/");
+		return toList(strJson);
 	}
 
-	public List<BaseDomain> hospedagens() {
-		return client.get_return_list("/recomendacao/perfil/hospedagem/");
+	public List<BaseDomain> buscarHospedagem() {
+		String strJson = restClient.get("/recomendacao/perfil/hospedagem/");
+		return toList(strJson);
 	}
 
-	public List<BaseDomain> transportesEvento() {
-		return client.get_return_list("/recomendacao/perfil/transporte-evento/");
+	public List<BaseDomain> buscarTransporteEvento() {
+		String strJson = restClient
+				.get("/recomendacao/perfil/transporte-evento/");
+		return toList(strJson);
 	}
 
-	public List<BaseDomain> meiosTransporte() {
-		return client.get_return_list("/recomendacao/perfil/meio-transporte/");
+	public List<BaseDomain> buscarMeioTransporte() {
+		String strJson = restClient
+				.get("/recomendacao/perfil/meio-transporte/");
+		return toList(strJson);
 	}
 
-	public List<BaseDomain> periodicidadesVisita() {
-		return client.get_return_list("/recomendacao/perfil/periodicidade-visita/");
+	public List<BaseDomain> buscarPeriodicidadeVisita() {
+		String strJson = restClient
+				.get("/recomendacao/perfil/periodicidade-visita/");
+		return toList(strJson);
 	}
 
-	public List<BaseDomain> temposEstadia() {
-		return client.get_return_list("/recomendacao/perfil/tempo-estadia/");
+	public List<BaseDomain> buscarTempoEstadia() {
+		String strJson = restClient.get("/recomendacao/perfil/tempo-estadia/");
+		return toList(strJson);
 	}
+
+	private List<BaseDomain> toList( String json ) {
+		 return new Gson().fromJson(json, new TypeToken<List<BaseDomain>>(){}.getType());
+	}
+	
 }

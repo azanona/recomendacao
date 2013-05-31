@@ -9,13 +9,19 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import br.com.zanona.tcc.client.R;
-import br.com.zanona.tcc.client.business.PerfilBusiness;
+import br.com.zanona.tcc.client.constants.IntentConstants;
 import br.com.zanona.tcc.client.domain.BaseDomain;
+import br.com.zanona.tcc.client.domain.Perfil;
+import br.com.zanona.tcc.client.domain.RoteiroTuristico;
+import br.com.zanona.tcc.client.facade.RecomendacaoFacade;
 
 public class PerfilActivity extends Activity {
 
+	private EditText txtNome;
+	private EditText txtIdade;
 	private Spinner spnSexo;
 	private Spinner spnEscolaridade;
 	private Spinner spnLocalTrabalho;
@@ -28,14 +34,14 @@ public class PerfilActivity extends Activity {
 	private Spinner spnPeriodicidade;
 	private Spinner spnTempoEstadia;
 
-	private PerfilBusiness business;
+	private RecomendacaoFacade facade;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.perfil);
 
-		business = new PerfilBusiness();
+		facade = new RecomendacaoFacade();
 
 		carregarComponentes();
 		carregarDados();
@@ -53,20 +59,22 @@ public class PerfilActivity extends Activity {
 		spnMeioTransporte = (Spinner) findViewById(R.id.spnMeioTransporte);
 		spnPeriodicidade = (Spinner) findViewById(R.id.spnPeriodicidade);
 		spnTempoEstadia = (Spinner) findViewById(R.id.spnTempoEstadia);
+		txtNome = (EditText) findViewById(R.id.txtNome);
+		txtIdade = (EditText) findViewById(R.id.txtIdade);
 	}
 
 	private void carregarDados() {
-		carregarSpinner(business.sexos(), spnSexo);
-		carregarSpinner(business.escolaridades(), spnEscolaridade);
-		carregarSpinner(business.locaisTrabalho(), spnLocalTrabalho);
-		carregarSpinner(business.estadosCivis(), spnEstadoCivil);
-		carregarSpinner(business.gastosViagem(), spnGastoViagem);
-		carregarSpinner(business.acompanhantes(), spnAcompanhante);
-		carregarSpinner(business.hospedagens(), spnHospedagem);
-		carregarSpinner(business.transportesEvento(), spnTransporteEvento);
-		carregarSpinner(business.meiosTransporte(), spnMeioTransporte);
-		carregarSpinner(business.periodicidadesVisita(), spnPeriodicidade);
-		carregarSpinner(business.temposEstadia(), spnTempoEstadia);
+		carregarSpinner(facade.buscarSexo(), spnSexo);
+		carregarSpinner(facade.buscarEscolaridade(), spnEscolaridade);
+		carregarSpinner(facade.buscarLocalTrabalho(), spnLocalTrabalho);
+		carregarSpinner(facade.buscarEstadoCivil(), spnEstadoCivil);
+		carregarSpinner(facade.buscarGastoViagem(), spnGastoViagem);
+		carregarSpinner(facade.buscarAcompanhante(), spnAcompanhante);
+		carregarSpinner(facade.buscarHospedagem(), spnHospedagem);
+		carregarSpinner(facade.buscarTransporteEvento(), spnTransporteEvento);
+		carregarSpinner(facade.buscarMeioTransporte(), spnMeioTransporte);
+		carregarSpinner(facade.buscarPeriodicidadeVisita(), spnPeriodicidade);
+		carregarSpinner(facade.buscarTempoEstadia(), spnTempoEstadia);
 	}
 
 	private void carregarSpinner(List<BaseDomain> lista , Spinner spn) {
@@ -84,18 +92,25 @@ public class PerfilActivity extends Activity {
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent = new Intent( this , MapActivity.class );
 		switch (item.getItemId()) {
 		case R.id.buscar:
-			Intent intent = new Intent();
+			
+			RoteiroTuristico r = facade.buscarRecomendacao(toDomain());
+			intent.putExtra(IntentConstants.ROTEIRO_TURISTICO, r);
 			setResult(RESULT_OK, intent);
 			return true;
 		case R.id.cancelar:
-			setResult(RESULT_CANCELED, new Intent());
+			setResult(RESULT_CANCELED, intent);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}
 
-
+	private Perfil toDomain() {
+		Perfil p = new Perfil();
+		p.setNome( txtNome.getText().toString() );
+		return p;
+	}
 }

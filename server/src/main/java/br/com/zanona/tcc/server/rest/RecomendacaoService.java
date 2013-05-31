@@ -14,7 +14,7 @@ import br.com.zanona.tcc.server.business.RecomendacaoBC;
 import br.com.zanona.tcc.server.domain.Perfil;
 import br.com.zanona.tcc.server.domain.Recomendacao;
 
-@Path("/recomendacao")
+@Path("/rbc")
 public class RecomendacaoService {
 
 	@Inject

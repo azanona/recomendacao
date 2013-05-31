@@ -1,5 +1,7 @@
 package br.com.zanona.tcc.client.rest;
 
+import java.io.UnsupportedEncodingException;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -19,6 +21,10 @@ public class RestClient {
 
 	public RestClient(ServidorRest servidor) {
 		this.servidor = servidor;
+	}
+
+	public static RestClient getInstance() {
+		return new RestClient(new ServidorRest("192.168.1.125", 8080));
 	}
 
 	/**
@@ -53,20 +59,28 @@ public class RestClient {
 	 * @param params
 	 * @throws Exception
 	 */
-	public void post(String pathService, String params) throws Exception {
+	public String post(String pathService, String params) {
 		HttpHost target = new HttpHost(servidor.getEndereco(),
 				servidor.getPorta());
 		HttpClient client = new DefaultHttpClient();
 		HttpPost post = new HttpPost(pathService);
+		String result = "";
+		HttpEntity entity;
+		try {
+			entity = new StringEntity(params);
+			post.setEntity(entity);
 
-		HttpEntity entity = new StringEntity(params);
-		post.setEntity(entity);
+			post.setHeader("Accept", "application/json");
+			post.setHeader("Content-type", "application/json");
 
-		post.setHeader("Accept", "application/json");
-		post.setHeader("Content-type", "application/json");
+			HttpResponse response = client.execute(target, post);
+			HttpEntity results = response.getEntity();
+			result = EntityUtils.toString(results);
 
-		HttpResponse response = client.execute(target, post);
-
+		} catch (Exception e) {
+			Log.e("RestClient", e.getMessage());
+		}
+		return result;
 	}
 
 }
