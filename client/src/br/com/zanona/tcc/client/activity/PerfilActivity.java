@@ -109,18 +109,6 @@ public class PerfilActivity extends Activity {
 			return super.onOptionsItemSelected(item);
 		}
 	}
-
-	/**
-	 * Método que obtem o valor selecionado do spinner e cria um novo objeto apenas com seu id.
-	 * Motivo da gambis é que o post do resteasy nao aceita meus strings utf8 e como só preciso do id..
-	 * @param spinner
-	 * @return
-	 */
-	private BaseDomain getSelectedSpinner( Spinner spinner ) {
-		BaseDomain bd = (BaseDomain) spnAcompanhante.getSelectedItem();
-		BaseDomain bdNovo = new BaseDomain( bd.getId() );
-		return bdNovo;
-	}
 	
 	private Perfil toDomain() {
 		Perfil p = new Perfil();
@@ -128,18 +116,18 @@ public class PerfilActivity extends Activity {
 		String wkt = facade.getPosicaoGPS(this);
 		p.setCoordenada( wkt );
 		//p.setSexo(sexo) //FIXME arruma essa coisa, pq no server é um enum..
-		p.setAcompanhante( getSelectedSpinner(spnAcompanhante)  );
-		p.setEscolaridade( getSelectedSpinner(spnEscolaridade) );
-		p.setEstadoCivil(getSelectedSpinner(spnEstadoCivil) );
-		p.setGastoViagem(getSelectedSpinner( spnGastoViagem));
-		p.setHospedagem(getSelectedSpinner( spnHospedagem));
+		p.setAcompanhante( (BaseDomain) spnAcompanhante.getSelectedItem()  );
+		p.setEscolaridade( (BaseDomain) spnEscolaridade.getSelectedItem() );
+		p.setEstadoCivil((BaseDomain) spnEstadoCivil.getSelectedItem() );
+		p.setGastoViagem((BaseDomain) spnGastoViagem.getSelectedItem());
+		p.setHospedagem((BaseDomain) spnHospedagem.getSelectedItem());
 		p.setIdade( Integer.parseInt(txtIdade.getText().toString()) );
-		p.setLocalTrabalho(getSelectedSpinner( spnLocalTrabalho));
-		p.setMeioTransporte(getSelectedSpinner( spnMeioTransporte));
-		p.setPeriodicidadeVisita(getSelectedSpinner( spnPeriodicidade));
+		p.setLocalTrabalho((BaseDomain) spnLocalTrabalho.getSelectedItem());
+		p.setMeioTransporte((BaseDomain) spnMeioTransporte.getSelectedItem());
+		p.setPeriodicidadeVisita((BaseDomain) spnPeriodicidade.getSelectedItem());
 		p.setRendaMensal( Float.parseFloat(txtRenda.getText().toString()) );
-		p.setTempoEstadia(getSelectedSpinner( spnTempoEstadia));
-		p.setTransporteEvento(getSelectedSpinner( spnTransporteEvento));
+		p.setTempoEstadia((BaseDomain) spnTempoEstadia.getSelectedItem());
+		p.setTransporteEvento((BaseDomain) spnTransporteEvento.getSelectedItem());
 		return p;
 	}
 }

@@ -13,10 +13,15 @@ import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import jcolibri.cbrcore.Attribute;
+import jcolibri.cbrcore.CaseComponent;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 @Entity
 @Table(name = "roteiro_turistico")
 @SequenceGenerator(name = "seq_roteiro_turistico", sequenceName = "seq_roteiro_turistico", allocationSize = 1)
-public class RoteiroTuristico implements Serializable {
+public class RoteiroTuristico implements CaseComponent, Serializable {
 
 	private static final long serialVersionUID = -954887524394065230L;
 
@@ -58,6 +63,12 @@ public class RoteiroTuristico implements Serializable {
 
 	public void setAtrativos(List<AtrativoTuristico> atrativos) {
 		this.atrativos = atrativos;
+	}
+	
+	@Override
+	@JsonIgnore
+	public Attribute getIdAttribute() {
+		return new Attribute("id", getClass());
 	}
 
 	@Override

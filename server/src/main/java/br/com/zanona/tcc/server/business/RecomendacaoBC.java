@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import jcolibri.cbrcore.CBRCase;
 import jcolibri.cbrcore.CBRQuery;
 import jcolibri.method.retrieve.RetrievalResult;
 
@@ -49,7 +50,7 @@ public class RecomendacaoBC extends DelegateCrud<Recomendacao, Integer, Recomend
 			CBRQuery query = new CBRQuery();
 			query.setDescription(perfil);
 			
-			List<RetrievalResult> recs = cbrCore.execCycle(query);
+			lstRecomendacao.addAll(cbrCore.execCycle(query) );
 			
 			// finalizando ciclo
 			cbrCore.postCycle();

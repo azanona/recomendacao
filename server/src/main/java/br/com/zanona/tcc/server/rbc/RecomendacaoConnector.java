@@ -57,7 +57,7 @@ public class RecomendacaoConnector implements Connector, Serializable {
 	@Override
 	public Collection<CBRCase> retrieveAllCases() {
 		logger.debug("retreive all cases");
-		return entityManager.createQuery("select new jcolibri.cbrcore.CBRCase( r.descricao , r.solucao ) from br.com.zanona.tcc.recserver.domain.Recomendacao r").getResultList();
+		return entityManager.createQuery("select new jcolibri.cbrcore.CBRCase( r.descricao , r.solucao ) from "+ Recomendacao.class.getName() +" r").getResultList();
 	}
 
 	/**

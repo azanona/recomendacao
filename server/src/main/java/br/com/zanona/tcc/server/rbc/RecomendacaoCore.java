@@ -24,6 +24,8 @@ import jcolibri.method.reuse.CombineQueryAndCasesMethod;
 import org.slf4j.Logger;
 
 import br.com.zanona.tcc.server.domain.Perfil;
+import br.com.zanona.tcc.server.domain.Recomendacao;
+import br.com.zanona.tcc.server.domain.RoteiroTuristico;
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 
 @BusinessController
@@ -88,7 +90,7 @@ public class RecomendacaoCore implements StandardCBRApplication {
 				"método depreciado. use execCycle ou execCycleWithLearn");
 	}
 
-	public List<RetrievalResult> execCycle(CBRQuery query)
+	public List<Recomendacao> execCycle(CBRQuery query)
 			throws ExecutionException {
 		logger.debug("iniciando execucao do ciclo de rbc :: sem aprendizado");
 
@@ -100,8 +102,12 @@ public class RecomendacaoCore implements StandardCBRApplication {
 
 		logger.debug("selecionando os casos :: obtendo os 10 mais similares");
 		eval = SelectCases.selectTopKRR(eval, 10);
-
-		return new ArrayList<RetrievalResult>(eval);
+		List<Recomendacao> lista = new ArrayList<Recomendacao>();
+		for ( RetrievalResult rr : eval ) {
+			CBRCase cbrCase = rr.get_case();
+			lista.add(new Recomendacao( (Perfil) cbrCase.getDescription() , (RoteiroTuristico) cbrCase.getSolution() ));
+		}
+		return lista;
 	}
 
 	/**

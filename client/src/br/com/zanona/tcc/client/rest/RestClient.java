@@ -6,8 +6,11 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.params.ConnRoutePNames;
+import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 import android.util.Log;
@@ -45,6 +48,8 @@ public class RestClient {
 		String result = null;
 		try {
 			HttpResponse response;
+			//HttpHost proxy = new HttpHost("192.168.1.25", 8888);
+			//get.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
 			response = client.execute(target, get);
 			HttpEntity results = response.getEntity();
 			result = EntityUtils.toString(results);
@@ -68,17 +73,19 @@ public class RestClient {
 		HttpClient client = new DefaultHttpClient();
 		HttpPost post = new HttpPost(pathService);
 		String result = "";
-		HttpEntity entity;
+		
 		try {
-			entity = new StringEntity(params , "UTF-8");
-			post.setEntity(entity);
-
-			post.setHeader("Accept", "application/json");
-			post.setHeader("Content-type", "application/json");
-
+			post.setEntity(new ByteArrayEntity(params.toString().getBytes("UTF8")));
+			
+			post.setHeader("Content-type", "application/json;charset=UTF-8");
+			post.setHeader("Accept-Charset" , "UTF-8");
+			
+			//HttpHost proxy = new HttpHost("192.168.1.25", 8888);
+			//post.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
+			
 			HttpResponse response = client.execute(target, post);
 			HttpEntity results = response.getEntity();
-			result = EntityUtils.toString(results);
+			result = EntityUtils.toString(results, "UTF-8");
 
 		} catch (Exception e) {
 			Log.e("RestClient", e.getMessage());
