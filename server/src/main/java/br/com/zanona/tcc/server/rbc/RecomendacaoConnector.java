@@ -3,7 +3,6 @@ package br.com.zanona.tcc.server.rbc;
 import java.io.Serializable;
 import java.net.URL;
 import java.util.Collection;
-import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -13,14 +12,16 @@ import jcolibri.cbrcore.CaseBaseFilter;
 import jcolibri.cbrcore.Connector;
 import jcolibri.exception.InitializingException;
 
+import org.hibernate.Session;
 import org.slf4j.Logger;
 
-import br.com.zanona.tcc.server.domain.Categoria;
 import br.com.zanona.tcc.server.domain.Perfil;
 import br.com.zanona.tcc.server.domain.Recomendacao;
 import br.com.zanona.tcc.server.domain.RoteiroTuristico;
 import br.gov.frameworkdemoiselle.stereotype.PersistenceController;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
+
+import com.vividsolutions.jts.geom.Geometry;
 
 
 @PersistenceController
@@ -51,6 +52,20 @@ public class RecomendacaoConnector implements Connector, Serializable {
 		}
 	}
 
+	/**
+	 * Calcula a distancia entre duas geometrias.
+	 * @param g1
+	 * @param g2
+	 * @return distancia em KM
+	 */
+	public double distance( Geometry g1 , Geometry g2 ) {
+		Session session = (Session) entityManager.getDelegate();
+		return (Double) session.createSQLQuery( "select st_distance( st_geomfromtext(:geometriaUm) , st_geomfromtext(:geometriaDois) , true) / 1000 " )
+			.setParameter("geometriaUm", g1.toText())
+			.setParameter("geometriaDois", g2.toText())
+			.uniqueResult();
+	}
+	
 	/**
 	 * Método que recupera todos os casos da base.
 	 */

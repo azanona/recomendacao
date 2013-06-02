@@ -20,26 +20,32 @@
 		<version>2.2.2</version>
 	</parent>
 
+
+	<properties>
+		<geotools.version>8-SNAPSHOT</geotools.version>
+		<org.jboss.resteasy.version>2.3.6.Final</org.jboss.resteasy.version>
+	</properties>
+
 	<dependencies>
 
 		<!-- JAX-RS -->
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jaxrs</artifactId>
-			<version>2.3.6.Final</version>
+			<version>${org.jboss.resteasy.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jackson-provider</artifactId>
-			<version>2.3.6.Final</version>
+			<version>${org.jboss.resteasy.version}</version>
 		</dependency>
 
 		<!-- JAX-RS + CDI -->
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-cdi</artifactId>
-			<version>2.3.6.Final</version>
+			<version>${org.jboss.resteasy.version}</version>
 		</dependency>
 
 		<!-- R.B.C. -->
@@ -101,6 +107,24 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.4</version>
 		</dependency>
+
+
+		<dependency>
+			<groupId>org.geotools</groupId>
+			<artifactId>gt-shapefile</artifactId>
+			<version>${geotools.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.geotools</groupId>
+			<artifactId>gt-swing</artifactId>
+			<version>${geotools.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.geotools</groupId>
+			<artifactId>gt-epsg-hsql</artifactId>
+			<version>${geotools.version}</version>
+		</dependency>
+
 
 		<!-- Test -->
 		<dependency>

@@ -58,24 +58,63 @@ public class RecomendacaoCore implements StandardCBRApplication {
 		simConfig.setDescriptionSimFunction(new Average()); 
 
 		// similaridade local @ atributo simples
-		simConfig.addMapping(new Attribute("coordenada", Perfil.class), new GeometrySimilarityFunction());
-		simConfig.addMapping(new Attribute("sexo", Perfil.class), new Equal());
-		simConfig.addMapping(new Attribute("idade", Perfil.class), new Interval(0.5));
-		simConfig.addMapping(new Attribute("rendaMensal", Perfil.class), new Interval(0.5));
+		Attribute attrCoordenada = new Attribute("coordenada", Perfil.class);
+		simConfig.addMapping(attrCoordenada, new GeometrySimilarityFunction());
+		simConfig.setWeight(attrCoordenada, 10d);
+		
+		Attribute attrSexo = new Attribute("sexo", Perfil.class);
+		simConfig.addMapping(attrSexo, new Equal());
+		simConfig.setWeight(attrSexo, 0.1d);
+		
+		Attribute attrIdade = new Attribute("idade", Perfil.class);
+		simConfig.addMapping(attrIdade, new Interval(100));
+		simConfig.setWeight(attrSexo, 0.1d);
+		
+		Attribute attrRenda = new Attribute("rendaMensal", Perfil.class);
+		simConfig.addMapping(attrRenda, new Interval(10000));
+		simConfig.setWeight(attrRenda, 0.1d);
 		
 		// similaridade local @ atributo complexo (objeto simples)
-		simConfig.addMapping(new Attribute("escolaridade", Perfil.class), new Equal());
-		simConfig.addMapping(new Attribute("localTrabalho", Perfil.class), new Equal());
-		simConfig.addMapping(new Attribute("estadoCivil", Perfil.class), new Equal());
-	
-		simConfig.addMapping(new Attribute("gastoViagem", Perfil.class), new Equal());
-		simConfig.addMapping(new Attribute("acompanhante", Perfil.class), new Equal());
-		simConfig.addMapping(new Attribute("hospedagem", Perfil.class), new Equal());
-		simConfig.addMapping(new Attribute("transporteEvento", Perfil.class), new Equal());
-		simConfig.addMapping(new Attribute("meioTransporte", Perfil.class), new Equal());
-		simConfig.addMapping(new Attribute("periodicidadeVisita", Perfil.class), new Equal());
-		simConfig.addMapping(new Attribute("tempoEstadia", Perfil.class), new Equal());
-				
+		Attribute attrEscolaridade = new Attribute("escolaridade", Perfil.class);
+		simConfig.addMapping(attrEscolaridade, new Equal());
+		simConfig.setWeight(attrSexo, 0.1d);
+		
+		Attribute attrLocalTrabalho = new Attribute("localTrabalho", Perfil.class);
+		simConfig.addMapping(attrLocalTrabalho, new Equal());
+		simConfig.setWeight(attrLocalTrabalho, 0.1d);
+		
+		Attribute attrEstadoCivil = new Attribute("estadoCivil", Perfil.class);
+		simConfig.addMapping(attrEstadoCivil, new Equal());
+		simConfig.setWeight(attrEstadoCivil, 0.1d);
+		
+		Attribute attrGastoViagem = new Attribute("gastoViagem", Perfil.class);
+		simConfig.addMapping(attrGastoViagem, new Equal());
+		simConfig.setWeight(attrGastoViagem, 0.1d);
+		
+		Attribute attrAcompanhante = new Attribute("acompanhante", Perfil.class);
+		simConfig.addMapping(attrAcompanhante, new Equal());
+		simConfig.setWeight(attrAcompanhante, 0.1d);
+		
+		Attribute attrHospedagem = new Attribute("hospedagem", Perfil.class);
+		simConfig.addMapping(attrHospedagem, new Equal());
+		simConfig.setWeight(attrHospedagem, 0.1d);
+		
+		Attribute attrTransporte = new Attribute("transporteEvento", Perfil.class);
+		simConfig.addMapping(attrTransporte, new Equal());
+		simConfig.setWeight(attrTransporte, 0.1d);
+		
+		Attribute attrMeioTransporte = new Attribute("meioTransporte", Perfil.class);
+		simConfig.addMapping(attrMeioTransporte, new Equal());
+		simConfig.setWeight(attrMeioTransporte, 0.1d);
+		
+		Attribute attrPeriodicidade = new Attribute("periodicidadeVisita", Perfil.class);
+		simConfig.addMapping(attrPeriodicidade, new Equal());
+		simConfig.setWeight(attrPeriodicidade, 0.1d);
+		
+		Attribute attrTempoEstadia = new Attribute("tempoEstadia", Perfil.class);
+		simConfig.addMapping(attrTempoEstadia, new Equal());
+		simConfig.setWeight(attrTempoEstadia, 0.1d);
+		
 		// Equal 								@ sim(c.a,q.a)= if ( c.a = q.a ) then 1 else 0
 		// Interval(interval) 					@ sim(c.a,q.a)=1-(|x-y|/interval)
 		// Threshold(t)							@ sim(c.a,q.a)= if ( c.a - q.a < treshold ) then 1 else 0
@@ -106,7 +145,7 @@ public class RecomendacaoCore implements StandardCBRApplication {
 		for ( RetrievalResult rr : eval ) {
 			CBRCase cbrCase = rr.get_case();
 			lista.add(new Recomendacao( (Perfil) cbrCase.getDescription() , (RoteiroTuristico) cbrCase.getSolution() ));
-		}
+		} 
 		return lista;
 	}
 

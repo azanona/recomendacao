@@ -1,6 +1,10 @@
 package br.com.zanona.tcc.client.business;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.com.zanona.tcc.client.domain.Perfil;
+import br.com.zanona.tcc.client.domain.Recomendacao;
 import br.com.zanona.tcc.client.domain.RoteiroTuristico;
 import br.com.zanona.tcc.client.rest.RestClient;
 
@@ -15,9 +19,10 @@ public class RoteiroTuristicoBusiness {
 		this.restClient = restClient;
 	}
 	
-	public RoteiroTuristico buscarRecomendacao( Perfil perfil ) {
+	public ArrayList<Recomendacao> buscarRecomendacao( Perfil perfil ) {
 		String json = new Gson().toJson(perfil, new TypeToken<Perfil>(){}.getType());
 		String jsonReturn = restClient.post("/recomendacao/rbc/buscar", json);
-		return new Gson().fromJson(jsonReturn, new TypeToken<RoteiroTuristico>(){}.getType());
+		return new Gson().fromJson(jsonReturn, new TypeToken< ArrayList<Recomendacao> >(){}.getType());
 	}
 }
+ 

@@ -1,5 +1,6 @@
 package br.com.zanona.tcc.client.facade;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -7,7 +8,8 @@ import br.com.zanona.tcc.client.business.PerfilBusiness;
 import br.com.zanona.tcc.client.business.RoteiroTuristicoBusiness;
 import br.com.zanona.tcc.client.domain.BaseDomain;
 import br.com.zanona.tcc.client.domain.Perfil;
-import br.com.zanona.tcc.client.domain.RoteiroTuristico;
+import br.com.zanona.tcc.client.domain.Recomendacao;
+import br.com.zanona.tcc.client.domain.Sexo;
 import br.com.zanona.tcc.client.gps.GPSTracker;
 import br.com.zanona.tcc.client.rest.RestClient;
 
@@ -24,7 +26,7 @@ public class RecomendacaoFacade {
 		perfilBusiness = new PerfilBusiness(client);
 	}
 	
-	public List<BaseDomain> buscarSexo() {
+	public List<Sexo> buscarSexo() {
 		return perfilBusiness.buscarSexo();
 	}
 
@@ -68,7 +70,7 @@ public class RecomendacaoFacade {
 		return perfilBusiness.buscarTempoEstadia();
 	}
 
-	public RoteiroTuristico buscarRecomendacao( Perfil perfil ){
+	public ArrayList<Recomendacao> buscarRecomendacao( Perfil perfil ){
 		return roteiroBusiness.buscarRecomendacao(perfil);
 	}
 	

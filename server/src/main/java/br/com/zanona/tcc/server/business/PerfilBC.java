@@ -105,11 +105,8 @@ public class PerfilBC implements Serializable {
 		return tempoEstadiaDAO.findAll();
 	}
 
-	public List<BaseDomain> buscarSexo() {
-		return Arrays.asList(new BaseDomain[]{
-			new BaseDomain( 1 , Sexo.MASCULINO.toString() ),
-			new BaseDomain( 2 , Sexo.FEMININO.toString() )
-		});
+	public List<Sexo> buscarSexo() {
+		return Arrays.asList( Sexo.values() );
 	}
 
 }

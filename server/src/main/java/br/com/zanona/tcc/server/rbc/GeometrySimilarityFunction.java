@@ -1,6 +1,9 @@
 package br.com.zanona.tcc.server.rbc;
 
+
 import java.text.MessageFormat;
+
+import javax.persistence.EntityManager;
 
 import jcolibri.exception.NoApplicableSimilarityFunctionException;
 import jcolibri.method.retrieve.NNretrieval.similarity.LocalSimilarityFunction;
@@ -15,6 +18,8 @@ public class GeometrySimilarityFunction implements LocalSimilarityFunction {
 
 	private Logger logger = Beans.getReference(Logger.class);
 
+	private RecomendacaoConnector connector = Beans.getReference(RecomendacaoConnector.class); 
+	
 	public GeometrySimilarityFunction() {
 		logger.debug("GeometrySimilarityFunction init");
 	}
@@ -26,12 +31,11 @@ public class GeometrySimilarityFunction implements LocalSimilarityFunction {
 	public double compute(Object caseObject, Object queryObject)
 			throws NoApplicableSimilarityFunctionException {
 		double compValue = 0;
-		logger.debug("GeometrySimilarityFunction compute :: iniciando");
+ 		logger.debug("GeometrySimilarityFunction compute :: iniciando");
 		if (caseObject instanceof Geometry && queryObject instanceof Geometry) {
 			Geometry p1 = (Geometry) caseObject;
 			Geometry p2 = (Geometry) queryObject;
-			compValue = p1.distance(p2);
-			
+		    compValue = 1 / connector.distance(p1, p2);
 			logger.debug(MessageFormat
 					.format("GeometrySimilarityFunction compute :: a distancia entre {0} e {1} é de {2}",
 							p1.toText(), p2.toText(), compValue));

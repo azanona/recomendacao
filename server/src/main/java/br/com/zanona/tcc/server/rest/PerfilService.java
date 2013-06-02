@@ -31,7 +31,7 @@ public class PerfilService {
 	@GET
 	@Path("/sexo/") 
 	@Produces("application/json;charset=UTF-8")
-	public List<BaseDomain> sexos() {
+	public List<Sexo> sexos() {
 		return perfilBC.buscarSexo();
 	}
 

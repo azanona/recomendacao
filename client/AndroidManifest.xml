@@ -32,6 +32,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="br.com.zanona.tcc.client.activity.MapActivity"
+            
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,19 +40,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="br.com.zanona.tcc.client.activity.PerfilActivity"
             android:label="@string/app_name" />
-        
-        <activity  
+        <activity
             android:name="br.com.zanona.tcc.client.activity.ConfiguracaoActivity"
             android:label="@string/app_name" />
-
         <activity
             android:name="br.com.zanona.tcc.client.activity.SplashActivity"
             android:label="@string/app_name" />
-        
+
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyA3b_teKz6CUqRJZJSqKHTvy7sfyv-FLBU" />

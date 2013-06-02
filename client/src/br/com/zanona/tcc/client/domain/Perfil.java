@@ -11,7 +11,7 @@ public class Perfil implements Serializable {
 
 	private String coordenada;
 
-	private Character sexo;
+	private Sexo sexo;
 
 	private Integer idade;
 
@@ -53,11 +53,11 @@ public class Perfil implements Serializable {
 		this.coordenada = coordenada;
 	}
 
-	public Character getSexo() {
+	public Sexo getSexo() {
 		return sexo;
 	}
 
-	public void setSexo(Character sexo) {
+	public void setSexo(Sexo sexo) {
 		this.sexo = sexo;
 	}
 

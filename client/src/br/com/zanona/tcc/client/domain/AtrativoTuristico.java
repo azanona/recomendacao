@@ -34,4 +34,18 @@ public class AtrativoTuristico implements Serializable {
 		this.coordenada = coordenada;
 	}
 
+	private Double[] getLatDouble() {
+		int iPos = getCoordenada().indexOf('(') + 1;
+		int fPos = getCoordenada().indexOf(')');
+		String[] latDouble = getCoordenada().substring(iPos, fPos).split(" ");
+		return new Double[]{ Double.parseDouble(latDouble[1]) , Double.parseDouble(latDouble[0] )};
+	}
+	
+	public Double getLatitude(){
+		return getLatDouble()[0];
+	}
+	
+	public Double getLongitude(){
+		return getLatDouble()[1];
+	}
 }

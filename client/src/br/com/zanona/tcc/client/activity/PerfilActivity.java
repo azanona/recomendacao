@@ -1,5 +1,6 @@
 package br.com.zanona.tcc.client.activity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -15,7 +16,7 @@ import br.com.zanona.tcc.client.R;
 import br.com.zanona.tcc.client.constants.IntentConstants;
 import br.com.zanona.tcc.client.domain.BaseDomain;
 import br.com.zanona.tcc.client.domain.Perfil;
-import br.com.zanona.tcc.client.domain.RoteiroTuristico;
+import br.com.zanona.tcc.client.domain.Recomendacao;
 import br.com.zanona.tcc.client.facade.RecomendacaoFacade;
 
 public class PerfilActivity extends Activity {
@@ -79,8 +80,8 @@ public class PerfilActivity extends Activity {
 		carregarSpinner(facade.buscarTempoEstadia(), spnTempoEstadia);
 	}
 
-	private void carregarSpinner(List<BaseDomain> lista , Spinner spn) {
-		spn.setAdapter( new ArrayAdapter<BaseDomain>(
+	private void carregarSpinner(List<?> lista , Spinner spn) {
+		spn.setAdapter( new ArrayAdapter(
 				this, 
 				android.R.layout.simple_spinner_dropdown_item, 
 				lista
@@ -98,12 +99,14 @@ public class PerfilActivity extends Activity {
 		switch (item.getItemId()) {
 		case R.id.buscar:
 			
-			RoteiroTuristico r = facade.buscarRecomendacao(toDomain());
+			ArrayList<Recomendacao> r = facade.buscarRecomendacao(toDomain());
 			intent.putExtra(IntentConstants.ROTEIRO_TURISTICO, r);
 			setResult(RESULT_OK, intent);
+			finish();
 			return true;
 		case R.id.cancelar:
 			setResult(RESULT_CANCELED, intent);
+			finish();
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);

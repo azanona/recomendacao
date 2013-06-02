@@ -17,7 +17,7 @@ public class AtrativoTuristicoDAO extends JPACrud<AtrativoTuristico, Integer> {
 	private static final long serialVersionUID = 4325708187005429639L;
 
 	public Integer count(){
-		Number total = (Number) getEntityManager().createQuery("select count(this.id) from br.com.zanona.tcc.recserver.domain.AtrativoTuristico this").getSingleResult();
+		Number total = (Number) getEntityManager().createQuery("select count(this.id) from "+ AtrativoTuristico.class.getName() +" this").getSingleResult();
 		return total.intValue();
 	}
 
