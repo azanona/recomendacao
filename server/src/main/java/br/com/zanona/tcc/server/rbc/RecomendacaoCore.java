@@ -144,7 +144,7 @@ public class RecomendacaoCore implements StandardCBRApplication {
 		List<Recomendacao> lista = new ArrayList<Recomendacao>();
 		for ( RetrievalResult rr : eval ) {
 			CBRCase cbrCase = rr.get_case();
-			lista.add((Recomendacao) cbrCase); //TODO ver se da erro.. senao new Recomenda(desc,sol)
+			lista.add(new Recomendacao( (Perfil)cbrCase.getDescription() , (RoteiroTuristico) cbrCase.getSolution() ));			
 		} 
 		return lista;
 	}
@@ -175,7 +175,7 @@ public class RecomendacaoCore implements StandardCBRApplication {
 
 		logger.debug("armazendo melhor caso gerado na etapa de revisão");
 		jcolibri.method.retain.StoreCasesMethod.storeCase(caseBase, bestCase);
-		return (Recomendacao) bestCase; //new Recomendacao((Perfil) bestCase.getDescription(), (RoteiroTuristico) bestCase.getSolution());
+		return new Recomendacao((Perfil) bestCase.getDescription(), (RoteiroTuristico) bestCase.getSolution());
 	}
 
 	@Override

@@ -72,7 +72,7 @@ public class RecomendacaoConnector implements Connector, Serializable {
 	@Override
 	public Collection<CBRCase> retrieveAllCases() {
 		logger.debug("retreive all cases");
-		return entityManager.createQuery("select this from "+ Recomendacao.class.getName() +" this").getResultList();
+		return entityManager.createQuery("select new jcolibri.cbrcore.CBRCase( this.descricao, this.solucao ) from "+ Recomendacao.class.getName() +" this").getResultList();
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class RecomendacaoConnector implements Connector, Serializable {
 		if (colecao != null && !colecao.isEmpty()) {
 			logger.debug("storeCases inicio");
 			for (CBRCase caso : colecao) {
-				entityManager.merge( caso );
+				entityManager.merge( new Recomendacao( (Perfil) caso.getDescription() , (RoteiroTuristico) caso.getSolution() ) );
 			}
 			logger.debug("storeCases fim");
 		}

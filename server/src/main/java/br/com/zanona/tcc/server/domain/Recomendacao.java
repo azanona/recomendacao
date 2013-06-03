@@ -19,7 +19,7 @@ import jcolibri.cbrcore.CaseComponent;
 @Entity
 @Table(name = "recomendacao")
 @SequenceGenerator(name = "seq_recomendacao", sequenceName = "seq_recomendacao", allocationSize = 1)
-public class Recomendacao extends CBRCase implements Serializable {
+public class Recomendacao implements Serializable {
 
 	private static final long serialVersionUID = 583719923667588582L;
 
@@ -66,25 +66,6 @@ public class Recomendacao extends CBRCase implements Serializable {
 
 	public void setSolucao(RoteiroTuristico solucao) {
 		this.solucao = solucao; 
-	}
-
-	@Override
-	public CaseComponent getSolution() {
-		return getSolucao();
-	}
-	
-	@Override
-	public CaseComponent getDescription() {
-		return getDescricao();
-	}
-	
-	@Override
-	public void setDescription(CaseComponent descricao) {
-		this.descricao = (Perfil) descricao;
-	}
-	@Override
-	public void setSolution(CaseComponent solucao) {
-		this.solucao = (RoteiroTuristico) solucao;
 	}
 	
 	@Override
