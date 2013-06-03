@@ -113,10 +113,6 @@ public class GPSTracker extends Service implements LocationListener {
             locationManager.removeUpdates(GPSTracker.this);
         }       
     }
-     
-    public String getWKT(){
-    	return "POINT(" + getLongitude() + " " + getLatitude() + ")";
-    }
     
     /**
      * Function to get latitude

@@ -25,13 +25,13 @@ public class RecomendacaoService {
 	@Consumes("application/json;charset=UTF-8")
 	@Produces("application/json;charset=UTF-8")
 	public Response buscar(Perfil perfil) {
-		List<Recomendacao> lstRecomendacao = null;
+		Recomendacao recomendacao = null;
 		try {
-			lstRecomendacao = recomBC.executar(perfil, true);
+			recomendacao = recomBC.executar(perfil, true);
 		} catch (Exception e) {
 		}
 		
-		return lstRecomendacao == null ? Response.serverError().build() : Response.ok(lstRecomendacao).build();
+		return recomendacao == null ? Response.serverError().build() : Response.ok(recomendacao).build();
 	}
 
 }

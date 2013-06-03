@@ -181,11 +181,11 @@ public class GeracaoCasosTest {
 			
 			// recomendacao
 			Recomendacao r = new Recomendacao();
-			r.setDescricao(descricao);
+			r.setDescription(descricao);
 			
 			RoteiroTuristico solucao = new RoteiroTuristico();
 			solucao.setAtrativos( atrativoDAO.getNeighborhood(descricao.getCoordenada(), 20000 , 5 + random.nextInt(15)) ); // 20km
-			r.setSolucao(solucao);
+			r.setSolution(solucao);
 			
 			recomendacaoDAO.insert(r);
 		}

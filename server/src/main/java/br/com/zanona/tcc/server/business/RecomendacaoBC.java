@@ -37,9 +37,9 @@ public class RecomendacaoBC extends DelegateCrud<Recomendacao, Integer, Recomend
 	 * @return
 	 * @throws RuntimeException
 	 */
-	public List<Recomendacao> executar(Perfil perfil , boolean usarAdaptacao) throws Exception {
+	public Recomendacao executar(Perfil perfil , boolean usarAdaptacao) throws Exception {
 		logger.debug("iniciando processo de recomendacao");
-		List<Recomendacao> lstRecomendacao = new ArrayList<Recomendacao>();
+		Recomendacao recomendacao = null;
 
 		try {
 			
@@ -50,7 +50,7 @@ public class RecomendacaoBC extends DelegateCrud<Recomendacao, Integer, Recomend
 			CBRQuery query = new CBRQuery();
 			query.setDescription(perfil);
 			
-			lstRecomendacao.addAll(cbrCore.execCycle(query) );
+			recomendacao = cbrCore.execCycleWithLearn(query) ;
 			
 			// finalizando ciclo
 			cbrCore.postCycle();
@@ -62,7 +62,7 @@ public class RecomendacaoBC extends DelegateCrud<Recomendacao, Integer, Recomend
 
 		logger.debug("finalizado processo de recomendacao");
 
-		return lstRecomendacao;
+		return recomendacao;
 	}
 
 }

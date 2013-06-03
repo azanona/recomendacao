@@ -144,7 +144,7 @@ public class RecomendacaoCore implements StandardCBRApplication {
 		List<Recomendacao> lista = new ArrayList<Recomendacao>();
 		for ( RetrievalResult rr : eval ) {
 			CBRCase cbrCase = rr.get_case();
-			lista.add(new Recomendacao( (Perfil) cbrCase.getDescription() , (RoteiroTuristico) cbrCase.getSolution() ));
+			lista.add((Recomendacao) cbrCase); //TODO ver se da erro.. senao new Recomenda(desc,sol)
 		} 
 		return lista;
 	}
@@ -155,7 +155,7 @@ public class RecomendacaoCore implements StandardCBRApplication {
 	 * @param eval
 	 * @return
 	 */
-	public CBRCase execCycleWithLearn(CBRQuery query) throws Exception {
+	public Recomendacao execCycleWithLearn(CBRQuery query) throws Exception {
 		logger.debug("iniciando execucao do ciclo de rbc");
 		NNConfig simConfig = getSimilarityConfig();
 
@@ -175,7 +175,7 @@ public class RecomendacaoCore implements StandardCBRApplication {
 
 		logger.debug("armazendo melhor caso gerado na etapa de revisão");
 		jcolibri.method.retain.StoreCasesMethod.storeCase(caseBase, bestCase);
-		return bestCase;
+		return (Recomendacao) bestCase; //new Recomendacao((Perfil) bestCase.getDescription(), (RoteiroTuristico) bestCase.getSolution());
 	}
 
 	@Override

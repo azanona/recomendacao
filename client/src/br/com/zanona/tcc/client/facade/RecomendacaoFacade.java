@@ -1,6 +1,5 @@
 package br.com.zanona.tcc.client.facade;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -12,6 +11,8 @@ import br.com.zanona.tcc.client.domain.Recomendacao;
 import br.com.zanona.tcc.client.domain.Sexo;
 import br.com.zanona.tcc.client.gps.GPSTracker;
 import br.com.zanona.tcc.client.rest.RestClient;
+
+import com.google.android.gms.maps.model.LatLng;
 
 public class RecomendacaoFacade {
 
@@ -70,13 +71,13 @@ public class RecomendacaoFacade {
 		return perfilBusiness.buscarTempoEstadia();
 	}
 
-	public ArrayList<Recomendacao> buscarRecomendacao( Perfil perfil ){
+	public Recomendacao buscarRecomendacao( Perfil perfil ){
 		return roteiroBusiness.buscarRecomendacao(perfil);
 	}
 	
-	public String getPosicaoGPS( Context context ) {
+	public LatLng getPosicaoGPS( Context context ) {
 		GPSTracker gps = new GPSTracker(context);
-		return gps.getWKT();
+		return new LatLng(gps.getLatitude(), gps.getLongitude());
 	}
 	
 }

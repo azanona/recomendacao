@@ -72,20 +72,19 @@ public class RecomendacaoConnector implements Connector, Serializable {
 	@Override
 	public Collection<CBRCase> retrieveAllCases() {
 		logger.debug("retreive all cases");
-		return entityManager.createQuery("select new jcolibri.cbrcore.CBRCase( r.descricao , r.solucao ) from "+ Recomendacao.class.getName() +" r").getResultList();
+		return entityManager.createQuery("select this from "+ Recomendacao.class.getName() +" this").getResultList();
 	}
 
 	/**
 	 * Método que armazena todos os casos passados por parametros.
 	 */
 	@Override
+	@Transactional
 	public void storeCases(Collection<CBRCase> colecao) {
 		if (colecao != null && !colecao.isEmpty()) {
 			logger.debug("storeCases inicio");
 			for (CBRCase caso : colecao) {
-				if (caso.getDescription() instanceof Perfil && caso.getSolution() instanceof RoteiroTuristico) {
-					entityManager.persist( new Recomendacao((Perfil) caso.getDescription() , (RoteiroTuristico) caso.getSolution()) );
-				}
+				entityManager.merge( caso );
 			}
 			logger.debug("storeCases fim");
 		}

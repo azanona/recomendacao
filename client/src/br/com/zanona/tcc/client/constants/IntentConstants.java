@@ -7,4 +7,7 @@ public class IntentConstants {
 	
 	public static final String CONFIGURACAO_REST = "servidor";
 	public static final String ROTEIRO_TURISTICO = "roteiro-turistico";
+	public static final String POSICAO_GPS = "gps";
+	public static final String LATITUDE = "latitude";
+	public static final String LONGITUDE = "longitude";
 }

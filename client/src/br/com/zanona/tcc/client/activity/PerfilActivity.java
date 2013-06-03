@@ -1,11 +1,12 @@
 package br.com.zanona.tcc.client.activity;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,6 +19,8 @@ import br.com.zanona.tcc.client.domain.BaseDomain;
 import br.com.zanona.tcc.client.domain.Perfil;
 import br.com.zanona.tcc.client.domain.Recomendacao;
 import br.com.zanona.tcc.client.facade.RecomendacaoFacade;
+
+import com.google.android.gms.maps.model.LatLng;
 
 public class PerfilActivity extends Activity {
 
@@ -35,6 +38,7 @@ public class PerfilActivity extends Activity {
 	private Spinner spnMeioTransporte;
 	private Spinner spnPeriodicidade;
 	private Spinner spnTempoEstadia;
+	private LatLng minhaPosicao;
 
 	private RecomendacaoFacade facade;
 
@@ -64,6 +68,16 @@ public class PerfilActivity extends Activity {
 		txtNome = (EditText) findViewById(R.id.txtNome);
 		txtIdade = (EditText) findViewById(R.id.txtIdade);
 		txtRenda = (EditText) findViewById(R.id.txtRenda);
+
+		if (getIntent().getExtras() != null) {
+			Double latitude = this.getIntent().getExtras()
+					.getDouble(IntentConstants.LATITUDE);
+			Double longitude = this.getIntent().getExtras()
+					.getDouble(IntentConstants.LONGITUDE);
+			if (latitude != null && longitude != null) {
+				minhaPosicao = new LatLng(latitude, longitude);
+			}
+		}
 	}
 
 	private void carregarDados() {
@@ -80,12 +94,9 @@ public class PerfilActivity extends Activity {
 		carregarSpinner(facade.buscarTempoEstadia(), spnTempoEstadia);
 	}
 
-	private void carregarSpinner(List<?> lista , Spinner spn) {
-		spn.setAdapter( new ArrayAdapter(
-				this, 
-				android.R.layout.simple_spinner_dropdown_item, 
-				lista
-		));
+	private void carregarSpinner(List<?> lista, Spinner spn) {
+		spn.setAdapter(new ArrayAdapter(this,
+				android.R.layout.simple_spinner_dropdown_item, lista));
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -95,11 +106,11 @@ public class PerfilActivity extends Activity {
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {
-		Intent intent = new Intent( this , MapActivity.class );
+		Intent intent = new Intent(this, MapActivity.class);
 		switch (item.getItemId()) {
 		case R.id.buscar:
-			
-			ArrayList<Recomendacao> r = facade.buscarRecomendacao(toDomain());
+
+			Recomendacao r = facade.buscarRecomendacao(toDomain());
 			intent.putExtra(IntentConstants.ROTEIRO_TURISTICO, r);
 			setResult(RESULT_OK, intent);
 			finish();
@@ -112,25 +123,34 @@ public class PerfilActivity extends Activity {
 			return super.onOptionsItemSelected(item);
 		}
 	}
-	
+
+	public String toWKT(LatLng latLng) {
+		return "POINT(" + latLng.longitude + " " + latLng.latitude + ")";
+	}
+
 	private Perfil toDomain() {
 		Perfil p = new Perfil();
-		p.setNome( txtNome.getText().toString() );
-		String wkt = facade.getPosicaoGPS(this);
-		p.setCoordenada( wkt );
-		//p.setSexo(sexo) //FIXME arruma essa coisa, pq no server é um enum..
-		p.setAcompanhante( (BaseDomain) spnAcompanhante.getSelectedItem()  );
-		p.setEscolaridade( (BaseDomain) spnEscolaridade.getSelectedItem() );
-		p.setEstadoCivil((BaseDomain) spnEstadoCivil.getSelectedItem() );
+		p.setNome(txtNome.getText().toString());
+
+		String wkt = toWKT(minhaPosicao == null ? facade.getPosicaoGPS(this)
+				: minhaPosicao);
+
+		p.setCoordenada(wkt);
+		// p.setSexo(sexo) //FIXME arruma essa coisa, pq no server é um enum..
+		p.setAcompanhante((BaseDomain) spnAcompanhante.getSelectedItem());
+		p.setEscolaridade((BaseDomain) spnEscolaridade.getSelectedItem());
+		p.setEstadoCivil((BaseDomain) spnEstadoCivil.getSelectedItem());
 		p.setGastoViagem((BaseDomain) spnGastoViagem.getSelectedItem());
 		p.setHospedagem((BaseDomain) spnHospedagem.getSelectedItem());
-		p.setIdade( Integer.parseInt(txtIdade.getText().toString()) );
+		p.setIdade(Integer.parseInt(txtIdade.getText().toString()));
 		p.setLocalTrabalho((BaseDomain) spnLocalTrabalho.getSelectedItem());
 		p.setMeioTransporte((BaseDomain) spnMeioTransporte.getSelectedItem());
-		p.setPeriodicidadeVisita((BaseDomain) spnPeriodicidade.getSelectedItem());
-		p.setRendaMensal( Float.parseFloat(txtRenda.getText().toString()) );
+		p.setPeriodicidadeVisita((BaseDomain) spnPeriodicidade
+				.getSelectedItem());
+		p.setRendaMensal(Float.parseFloat(txtRenda.getText().toString()));
 		p.setTempoEstadia((BaseDomain) spnTempoEstadia.getSelectedItem());
-		p.setTransporteEvento((BaseDomain) spnTransporteEvento.getSelectedItem());
+		p.setTransporteEvento((BaseDomain) spnTransporteEvento
+				.getSelectedItem());
 		return p;
 	}
 }
