@@ -25,4 +25,5 @@
     <string name="periodicidadevisita">Periodicidade visita</string>
     <string name="tempoestadia">Tempo estadia</string>
     <string name="renda">Renda mensal</string>
+	<string name="posicao_gps">Posição GPS</string>
 </resources>

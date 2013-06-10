@@ -1,13 +1,10 @@
 package br.com.zanona.tcc.server.rest;
 
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import br.com.zanona.tcc.server.business.RecomendacaoBC;
@@ -25,13 +22,20 @@ public class RecomendacaoService {
 	@Consumes("application/json;charset=UTF-8")
 	@Produces("application/json;charset=UTF-8")
 	public Response buscar(Perfil perfil) {
-		Recomendacao recomendacao = null;
 		try {
-			recomendacao = recomBC.executar(perfil, true);
-		} catch (Exception e) {
-		}
+			return Response.ok(recomBC.executar(perfil)).build(); 
 		
-		return recomendacao == null ? Response.serverError().build() : Response.ok(recomendacao).build();
+		} catch (Exception e) {
+			return Response.serverError().build();
+		}
+	}
+	
+	@POST
+	@Path("/aprender")
+	@Consumes("application/json;charset=UTF-8")
+	public Response aprender(Recomendacao recomendacao) {
+		recomBC.aprender(recomendacao);
+		return recomendacao == null ? Response.serverError().build() : Response.ok().build();
 	}
 
 }

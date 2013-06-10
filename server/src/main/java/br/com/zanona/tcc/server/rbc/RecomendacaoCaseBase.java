@@ -1,10 +1,12 @@
 package br.com.zanona.tcc.server.rbc;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.inject.Inject;
 
 import jcolibri.casebase.CachedLinealCaseBase;
+import jcolibri.cbrcore.CBRCase;
 import jcolibri.exception.InitializingException;
 
 import org.slf4j.Logger;
@@ -28,5 +30,13 @@ public class RecomendacaoCaseBase extends CachedLinealCaseBase implements Serial
 	 */
 	public void init() throws InitializingException {
 		super.init(this.connector);
+	}
+	
+	/**
+	 * Armazena o caso sem necessidade de efetuar um init() 
+	 * @param cases
+	 */
+	public void storeCases(Collection<CBRCase> cases) {
+		connector.storeCases(cases);
 	}
 }

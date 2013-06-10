@@ -124,7 +124,7 @@ public class GeracaoCasosTest {
 	@Before
 	public void init() throws Exception {
 		nomesAleatorios = carregarNomes("/nomes-aleatorios");
-		destinoAleatorio = carregarDestinos(nomesAleatorios.length);
+		//destinoAleatorio = carregarDestinos(nomesAleatorios.length);
 		escolaridades = escolaridadeDAO.findAll();
 		locaisTrabalho = localTrabalhoDAO.findAll();
 		estadosCivis = estadoCivilDAO.findAll();
@@ -166,7 +166,7 @@ public class GeracaoCasosTest {
 			descricao.setNome(nome);
 			descricao.setRendaMensal( 1000 + random.nextFloat() * (7000 - 1000) ); // R$1000 e R$7000
 			descricao.setIdade( 18 + random.nextInt(62) );
-			descricao.setCoordenada(destinoAleatorio.get(random.nextInt(destinoAleatorio.size())).getCoordenada());
+			//descricao.setCoordenada(destinoAleatorio.get(random.nextInt(destinoAleatorio.size())).getCoordenada());
 			descricao.setAcompanhante( acompanhantes.get( random.nextInt(acompanhantes.size()) ) );
 			descricao.setEscolaridade( escolaridades.get( random.nextInt(escolaridades.size()) ) );
 			descricao.setEstadoCivil( estadosCivis.get( random.nextInt(estadosCivis.size()) ) );
@@ -184,7 +184,7 @@ public class GeracaoCasosTest {
 			r.setDescricao(descricao);
 			
 			RoteiroTuristico solucao = new RoteiroTuristico();
-			solucao.setAtrativos( atrativoDAO.getNeighborhood(descricao.getCoordenada(), 20000 , 5 + random.nextInt(15)) ); // 20km
+			//solucao.setAtrativos( atrativoDAO.getNeighborhood(descricao.getCoordenada(), 20000 , 5 + random.nextInt(15)) ); // 20km
 			r.setSolucao(solucao);
 			
 			recomendacaoDAO.insert(r);

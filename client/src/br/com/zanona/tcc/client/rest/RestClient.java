@@ -6,11 +6,8 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.entity.ByteArrayEntity;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 import android.util.Log;
@@ -21,8 +18,8 @@ public class RestClient {
 	private ServidorRest servidor;
 
 	private RestClient() {
-		this(new ServidorRest("192.168.1.134", 8080));
-	}
+		this(new ServidorRest("192.168.1.125", 8080));
+	} 
 
 	public RestClient(ServidorRest servidor) {
 		this.servidor = servidor;
@@ -68,8 +65,10 @@ public class RestClient {
 	 * @throws Exception
 	 */
 	public String post(String pathService, String params) {
-		HttpHost target = new HttpHost(servidor.getEndereco(),
-				servidor.getPorta());
+		HttpHost target = new HttpHost(
+			servidor.getEndereco(),
+			servidor.getPorta()
+		);
 		HttpClient client = new DefaultHttpClient();
 		HttpPost post = new HttpPost(pathService);
 		String result = "";
@@ -79,9 +78,6 @@ public class RestClient {
 			
 			post.setHeader("Content-type", "application/json;charset=UTF-8");
 			post.setHeader("Accept-Charset" , "UTF-8");
-			
-			//HttpHost proxy = new HttpHost("192.168.1.25", 8888);
-			//post.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
 			
 			HttpResponse response = client.execute(target, post);
 			HttpEntity results = response.getEntity();

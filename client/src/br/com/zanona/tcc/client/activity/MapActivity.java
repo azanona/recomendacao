@@ -14,6 +14,7 @@ import br.com.zanona.tcc.client.constants.IntentConstants;
 import br.com.zanona.tcc.client.domain.AtrativoTuristico;
 import br.com.zanona.tcc.client.domain.Perfil;
 import br.com.zanona.tcc.client.domain.Recomendacao;
+import br.com.zanona.tcc.client.facade.RecomendacaoFacade;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
@@ -28,33 +29,43 @@ public class MapActivity extends FragmentActivity {
 
 	private Marker minhaPosicao;
 	private Recomendacao recomendacao;
+	private RecomendacaoFacade facade;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.map);
 
-		getMap().setOnMapClickListener(new OnMapClickListener() {
-			@Override
-			public void onMapClick(LatLng point) {
-				// senao efetuou recomendacao pode definir novo local
-				if (recomendacao == null) {
-					// limpando posicao antiga
-					if (minhaPosicao != null) {
-						minhaPosicao.remove();
+		if (getMap() != null) {
+			getMap().setOnMapClickListener(new OnMapClickListener() {
+				@Override
+				public void onMapClick(LatLng point) {
+					// senao efetuou recomendacao pode definir novo local
+					if (recomendacao == null) {
+						// limpando posicao antiga
+						if (minhaPosicao != null) {
+							minhaPosicao.remove();
+						}
+						// marcador azul
+						plotarMinhaPosicao(point);
 					}
-					// marcador azul
-					BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory
-							.defaultMarker(BitmapDescriptorFactory.HUE_AZURE);
-					// definindo posicao atual
-					minhaPosicao = getMap().addMarker(
-							new MarkerOptions().position(point)
-									.title("Minha posição manual")
-									.icon(bitmapDescriptor));
 				}
-			}
-		});
+			});
+		}
+		facade = new RecomendacaoFacade();
 
+	}
+
+	private void plotarMinhaPosicao(LatLng point) {
+		if (minhaPosicao != null) {
+			minhaPosicao.remove();
+		}
+		BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory
+				.defaultMarker(BitmapDescriptorFactory.HUE_AZURE);
+		// definindo posicao atual
+		minhaPosicao = getMap().addMarker(
+				new MarkerOptions().position(point)
+						.title("Minha posição manual").icon(bitmapDescriptor));
 	}
 
 	/**
@@ -86,12 +97,17 @@ public class MapActivity extends FragmentActivity {
 		switch (item.getItemId()) {
 		case R.id.recomendar:
 			Intent intent = new Intent(this, PerfilActivity.class);
-			if ( minhaPosicao != null ) {
-				intent.putExtra(IntentConstants.LATITUDE, minhaPosicao.getPosition().latitude );
-				intent.putExtra(IntentConstants.LONGITUDE, minhaPosicao.getPosition().longitude);
+			if (minhaPosicao != null) {
+				intent.putExtra(IntentConstants.LATITUDE,
+						minhaPosicao.getPosition().latitude);
+				intent.putExtra(IntentConstants.LONGITUDE,
+						minhaPosicao.getPosition().longitude);
 			}
 			startActivityForResult(intent,
 					IntentConstants.RESULT_ROTEIRO_TURISTICO);
+			break;
+		case R.id.posicao_gps:
+			plotarMinhaPosicao(facade.getPosicaoGPS(this));
 			break;
 		case R.id.limpar:
 			limparMapa();
@@ -105,7 +121,8 @@ public class MapActivity extends FragmentActivity {
 
 	private void limparMapa() {
 		getMap().clear();
-		minhaPosicao = null;	
+		minhaPosicao = null;
+		recomendacao = null;
 	}
 
 	@Override
@@ -117,8 +134,9 @@ public class MapActivity extends FragmentActivity {
 			case IntentConstants.RESULT_ROTEIRO_TURISTICO:
 				Object oRoteiroTuristico = pData.getExtras().get(
 						IntentConstants.ROTEIRO_TURISTICO);
-				Recomendacao r = (Recomendacao) oRoteiroTuristico;
-				for (AtrativoTuristico at : r.getSolucao().getAtrativos()) {
+				recomendacao = (Recomendacao) oRoteiroTuristico;
+				for (AtrativoTuristico at : recomendacao.getSolucao()
+						.getAtrativos()) {
 					getMap().addMarker(
 							new MarkerOptions().position(
 									new LatLng(at.getLatitude(), at

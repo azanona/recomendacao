@@ -1,8 +1,6 @@
 package br.com.zanona.tcc.server.rbc;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -41,9 +39,7 @@ public class RecomendacaoCore implements StandardCBRApplication {
 	 * As configurações são injetadas do contexto.
 	 */
 	@Override
-	@Deprecated
-	public void configure() throws ExecutionException {
-	}
+	public void configure() throws ExecutionException { }
 
 	@Override
 	public CBRCaseBase preCycle() throws ExecutionException {
@@ -71,7 +67,7 @@ public class RecomendacaoCore implements StandardCBRApplication {
 		simConfig.setWeight(attrSexo, 0.1d);
 		
 		Attribute attrRenda = new Attribute("rendaMensal", Perfil.class);
-		simConfig.addMapping(attrRenda, new Interval(10000));
+		simConfig.addMapping(attrRenda, new Interval(100000));
 		simConfig.setWeight(attrRenda, 0.1d);
 		
 		// similaridade local @ atributo complexo (objeto simples)
@@ -129,24 +125,28 @@ public class RecomendacaoCore implements StandardCBRApplication {
 				"método depreciado. use execCycle ou execCycleWithLearn");
 	}
 
-	public List<Recomendacao> execCycle(CBRQuery query)
+	public Recomendacao execCycle(Perfil perfil)
 			throws ExecutionException {
 		logger.debug("iniciando execucao do ciclo de rbc :: sem aprendizado");
 
 		NNConfig simConfig = getSimilarityConfig();
 
+		CBRQuery query = new CBRQuery();
+		query.setDescription(perfil);
+		
 		logger.debug("executando vizinho mais proximo");
 		Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(
 				caseBase.getCases(), query, simConfig);
 
 		logger.debug("selecionando os casos :: obtendo os 10 mais similares");
 		eval = SelectCases.selectTopKRR(eval, 10);
-		List<Recomendacao> lista = new ArrayList<Recomendacao>();
-		for ( RetrievalResult rr : eval ) {
-			CBRCase cbrCase = rr.get_case();
-			lista.add(new Recomendacao( (Perfil)cbrCase.getDescription() , (RoteiroTuristico) cbrCase.getSolution() ));			
-		} 
-		return lista;
+		
+		CBRCase cbrCase = eval.iterator().next().get_case();
+		
+		return new Recomendacao( 
+			(Perfil)cbrCase.getDescription() , 
+			(RoteiroTuristico) cbrCase.getSolution() 
+		);
 	}
 
 	/**
@@ -178,6 +178,10 @@ public class RecomendacaoCore implements StandardCBRApplication {
 		return new Recomendacao((Perfil) bestCase.getDescription(), (RoteiroTuristico) bestCase.getSolution());
 	}
 
+	public void learn( Recomendacao recomendacao ) {
+		caseBase.learnCases(  new CBRCase(recomendacao.getDescricao(), recomendacao.getSolucao() ));
+	}
+	
 	@Override
 	public void postCycle() throws ExecutionException {
 		logger.debug("finalizando base de casos");
