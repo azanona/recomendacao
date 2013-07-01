@@ -7,9 +7,5 @@
     <item
         android:id="@+id/limpar"
         android:title="@string/limpar_recomendacao"/>
-   
-    <item
-        android:id="@+id/posicao_gps"
-        android:title="@string/posicao_gps"/>
     
 </menu>

@@ -18,7 +18,7 @@ public class RestClient {
 	private ServidorRest servidor;
 
 	private RestClient() {
-		this(new ServidorRest("192.168.1.125", 8080));
+		this(new ServidorRest("199.116.118.135", 80));
 	} 
 
 	public RestClient(ServidorRest servidor) {

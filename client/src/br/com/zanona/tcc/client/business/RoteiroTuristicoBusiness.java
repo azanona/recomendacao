@@ -20,5 +20,10 @@ public class RoteiroTuristicoBusiness {
 		String jsonReturn = restClient.post("/recomendacao/rbc/buscar", json);
 		return new Gson().fromJson(jsonReturn, new TypeToken< Recomendacao >(){}.getType());
 	}
+
+	public void salvar(Recomendacao recomendacao) {
+		String json = new Gson().toJson(recomendacao, new TypeToken<Recomendacao>(){}.getType());
+		//restClient.post("/recomendacao/rbc/aprender", json);
+	}
 }
  

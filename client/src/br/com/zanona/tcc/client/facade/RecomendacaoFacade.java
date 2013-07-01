@@ -79,5 +79,9 @@ public class RecomendacaoFacade {
 		GPSTracker gps = new GPSTracker(context);
 		return new LatLng(gps.getLatitude(), gps.getLongitude());
 	}
+
+	public void salvar(Recomendacao recomendacao) {
+		roteiroBusiness.salvar(recomendacao);
+	}
 	
 }
