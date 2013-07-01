@@ -36,8 +36,8 @@ public class RoteiroTuristico implements CaseComponent, Serializable {
 	@ManyToMany
 	@JoinTable(
 		name = "roteiro_turistico_atrativo", 
-		joinColumns = { @JoinColumn(name = "rot_id") }, 
-		inverseJoinColumns = { @JoinColumn(name = "att_id") }
+		joinColumns = { @JoinColumn(name = "rtt_rot_id" , referencedColumnName="rot_id") }, 
+		inverseJoinColumns = { @JoinColumn(name = "rtt_att_id" , referencedColumnName="att_id") }
 	)
 	private List<AtrativoTuristico> atrativos;
 
