@@ -1,5 +1,6 @@
 package br.com.zanona.tcc.server.rbc;
 
+import java.util.Arrays;
 import java.util.Collection;
 
 import javax.inject.Inject;
@@ -179,7 +180,7 @@ public class RecomendacaoCore implements StandardCBRApplication {
 	}
 
 	public void learn( Recomendacao recomendacao ) {
-		caseBase.learnCases(  new CBRCase(recomendacao.getDescricao(), recomendacao.getSolucao() ));
+		caseBase.learnCases(  Arrays.asList(new CBRCase(recomendacao.getDescricao(), recomendacao.getSolucao() )));
 	}
 	
 	@Override
