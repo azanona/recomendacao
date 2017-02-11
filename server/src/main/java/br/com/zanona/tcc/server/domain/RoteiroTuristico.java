@@ -16,8 +16,6 @@ import javax.persistence.Table;
 import jcolibri.cbrcore.Attribute;
 import jcolibri.cbrcore.CaseComponent;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-
 @Entity
 @Table(name = "roteiro_turistico")
 @SequenceGenerator(name = "seq_roteiro_turistico", sequenceName = "seq_roteiro_turistico", allocationSize = 1)
@@ -66,7 +64,7 @@ public class RoteiroTuristico implements CaseComponent, Serializable {
 	}
 	
 	@Override
-	@JsonIgnore
+//	@JsonIgnore
 	public Attribute getIdAttribute() {
 		return new Attribute("id", getClass());
 	}

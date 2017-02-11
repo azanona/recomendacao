@@ -15,11 +15,10 @@
 	<url></url>
 
 	<parent>
-		<groupId>br.gov.frameworkdemoiselle</groupId>
-		<artifactId>demoiselle-web-parent</artifactId>
-		<version>2.2.2</version>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.1.RELEASE</version>
 	</parent>
-
 
 	<properties>
 		<geotools.version>8-SNAPSHOT</geotools.version>
@@ -28,24 +27,21 @@
 
 	<dependencies>
 
-		<!-- JAX-RS -->
+		<!-- Spring -->
 		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-jaxrs</artifactId>
-			<version>${org.jboss.resteasy.version}</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-jackson-provider</artifactId>
-			<version>${org.jboss.resteasy.version}</version>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
 		</dependency>
 
-		<!-- JAX-RS + CDI -->
 		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-cdi</artifactId>
-			<version>${org.jboss.resteasy.version}</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 
 		<!-- R.B.C. -->
@@ -57,36 +53,24 @@
 
 		<!-- JPA/JTA. -->
 
-		<dependency>
-			<groupId>br.gov.frameworkdemoiselle</groupId>
-			<artifactId>demoiselle-jpa</artifactId>
-			<scope>compile</scope>
-		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>org.hibernate</groupId> -->
+		<!-- <artifactId>hibernate-entitymanager</artifactId> -->
+		<!-- </dependency> -->
 
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>org.hibernate</groupId> -->
+		<!-- <artifactId>hibernate-validator</artifactId> -->
+		<!-- </dependency> -->
 
 		<!-- Hibernate Spatial -->
 
 		<dependency>
-			<groupId>org.hibernatespatial</groupId>
-			<artifactId>hibernate-spatial-postgis</artifactId>
-			<version>1.1</version>
-			<!-- versao 3.14 gera erro no resteasy -->
-			<exclusions>
-				<exclusion>
-					<artifactId>javassist</artifactId>
-					<groupId>javassist</groupId>
-				</exclusion>
-			</exclusions>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-spatial</artifactId>
+			<version>5.0.11.Final</version>
 		</dependency>
+
 
 		<!-- JDBC -->
 		<dependency>
@@ -108,13 +92,6 @@
 			<version>2.4</version>
 		</dependency>
 
-		<!-- Test -->
-		<dependency>
-			<groupId>br.gov.frameworkdemoiselle.component</groupId>
-			<artifactId>demoiselle-junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-
 	</dependencies>
 
 
@@ -124,10 +101,6 @@
 	</build>
 
 	<repositories>
-		<repository>
-			<id>demoiselle.sourceforge.net-release</id>
-			<url>http://demoiselle.sourceforge.net/repository/release</url>
-		</repository>
 		<repository>
 			<id>OSGEO GeoTools repo</id>
 			<url>http://download.osgeo.org/webdav/geotools</url>
@@ -143,13 +116,6 @@
 		<repository>
 			<id>Hibernate Spatial repo</id>
 			<url>http://www.hibernatespatial.org/repository</url>
-		</repository>
-		<repository>
-			<id>demoiselle.spatial.git.snapshot</id>
-			<url>https://raw.github.com/rafaelsoto/demoiselle-spatial/master/mvn-repo/snapshots</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
 		</repository>
 	</repositories>
 	<organization>

@@ -3,22 +3,21 @@ package br.com.zanona.tcc.server.rbc;
 
 import java.text.MessageFormat;
 
-import javax.persistence.EntityManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.vividsolutions.jts.geom.Geometry;
 
 import jcolibri.exception.NoApplicableSimilarityFunctionException;
 import jcolibri.method.retrieve.NNretrieval.similarity.LocalSimilarityFunction;
 
-import org.slf4j.Logger;
-
-import br.gov.frameworkdemoiselle.util.Beans;
-
-import com.vividsolutions.jts.geom.Geometry;
-
 public class GeometrySimilarityFunction implements LocalSimilarityFunction {
 
-	private Logger logger = Beans.getReference(Logger.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	private RecomendacaoConnector connector = Beans.getReference(RecomendacaoConnector.class); 
+	@Autowired
+	private RecomendacaoConnector connector; 
 	
 	public GeometrySimilarityFunction() {
 		logger.debug("GeometrySimilarityFunction init");

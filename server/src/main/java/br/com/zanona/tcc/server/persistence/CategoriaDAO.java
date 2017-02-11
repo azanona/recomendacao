@@ -1,12 +1,12 @@
 package br.com.zanona.tcc.server.persistence;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
 import br.com.zanona.tcc.server.domain.Categoria;
-import br.gov.frameworkdemoiselle.stereotype.PersistenceController;
-import br.gov.frameworkdemoiselle.template.JPACrud;
 
-@PersistenceController
-public class CategoriaDAO extends JPACrud<Categoria , Integer>{
+@Repository
+public interface CategoriaDAO extends JpaRepository<Categoria , Integer>{
 
-	private static final long serialVersionUID = -2190359440357013694L;
 
 }

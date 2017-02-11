@@ -6,13 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import javax.inject.Inject;
-
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.zanona.tcc.server.domain.Acompanhante;
 import br.com.zanona.tcc.server.domain.AtrativoTuristico;
@@ -42,12 +40,11 @@ import br.com.zanona.tcc.server.persistence.PeriodicidadeVisitaDAO;
 import br.com.zanona.tcc.server.persistence.RecomendacaoDAO;
 import br.com.zanona.tcc.server.persistence.TempoEstadiaDAO;
 import br.com.zanona.tcc.server.persistence.TransporteEventoDAO;
-import br.gov.frameworkdemoiselle.junit.DemoiselleRunner;
 
-@RunWith(DemoiselleRunner.class)
+//@RunWith(DemoiselleRunner.class)
 public class GeracaoCasosTest {
 
-	@Inject
+	@Autowired
 	private Logger log;
 
 	private String[] nomesAleatorios;
@@ -65,47 +62,48 @@ public class GeracaoCasosTest {
 	private List<PeriodicidadeVisita> periodicidadesVisita;
 	private List<TempoEstadia> temposEstadia;
 
-	@Inject
+	@Autowired
 	private PerfilDAO perfilDAO;
-	
-	@Inject
+
+	@Autowired
 	private EscolaridadeDAO escolaridadeDAO;
-	
-	@Inject
+
+	@Autowired
 	private LocalTrabalhoDAO localTrabalhoDAO;
-	
-	@Inject
+
+	@Autowired
 	private EstadoCivilDAO estadoCivilDAO;
-	
-	@Inject
+
+	@Autowired
 	private GastoViagemDAO gastoViagemDAO;
-	
-	@Inject
+
+	@Autowired
 	private AcompanhanteDAO acompanhanteDAO;
-	
-	@Inject
+
+	@Autowired
 	private HospedagemDAO hospedagemDAO;
-	
-	@Inject
+
+	@Autowired
 	private TransporteEventoDAO transporteventoDAO;
-	
-	@Inject
+
+	@Autowired
 	private MeioTransporteDAO meioTransporteDAO;
-	
-	@Inject
+
+	@Autowired
 	private PeriodicidadeVisitaDAO periodicidadeVisitaDAO;
-	
-	@Inject
+
+	@Autowired
 	private TempoEstadiaDAO tempoEstadiaDAO;
-	
-	@Inject
+
+	@Autowired
 	private AtrativoTuristicoDAO atrativoDAO;
 
-	@Inject
+	@Autowired
 	private RecomendacaoDAO recomendacaoDAO;
-	
+
 	/**
 	 * http://www.wjr.eti.br/nameGenerator/
+	 * 
 	 * @param pathArquivo
 	 * @return
 	 * @throws IOException
@@ -124,8 +122,8 @@ public class GeracaoCasosTest {
 	@Before
 	public void init() throws Exception {
 		nomesAleatorios = carregarNomes("/nomes-aleatorios");
-		//destinoAleatorio = carregarDestinos(nomesAleatorios.length);
-		escolaridades = escolaridadeDAO.findAll();
+		// destinoAleatorio = carregarDestinos(nomesAleatorios.length);
+//		escolaridades = escolaridadeDAO.findAll();
 		locaisTrabalho = localTrabalhoDAO.findAll();
 		estadosCivis = estadoCivilDAO.findAll();
 		gastosViagem = gastoViagemDAO.findAll();
@@ -146,10 +144,10 @@ public class GeracaoCasosTest {
 		Random r = new Random();
 		for (int i = 0; i < numDestinos;) {
 			Integer proxId = 1 + r.nextInt(total);
-			AtrativoTuristico atrativo = atrativoDAO.load(proxId);
-			Integer totalAtrativos = atrativoDAO.getNeighborhood(atrativo , distanciaMinima , distanciaMaxima );
+			AtrativoTuristico atrativo = atrativoDAO.findOne(proxId);
+			Integer totalAtrativos = atrativoDAO.getNeighborhood(atrativo, distanciaMinima, distanciaMaxima);
 			Integer totalPerfil = perfilDAO.getNeighborhood(new Perfil(atrativo.getCoordenada()), 500);
-			if (totalAtrativos >= totalMinimoVizinhos && totalPerfil == 0 ) {
+			if (totalAtrativos >= totalMinimoVizinhos && totalPerfil == 0) {
 				lista.add(atrativo);
 				i++;
 			}
@@ -164,30 +162,32 @@ public class GeracaoCasosTest {
 			// perfil
 			Perfil descricao = new Perfil();
 			descricao.setNome(nome);
-			descricao.setRendaMensal( 1000 + random.nextFloat() * (7000 - 1000) ); // R$1000 e R$7000
-			descricao.setIdade( 18 + random.nextInt(62) );
-			//descricao.setCoordenada(destinoAleatorio.get(random.nextInt(destinoAleatorio.size())).getCoordenada());
-			descricao.setAcompanhante( acompanhantes.get( random.nextInt(acompanhantes.size()) ) );
-			descricao.setEscolaridade( escolaridades.get( random.nextInt(escolaridades.size()) ) );
-			descricao.setEstadoCivil( estadosCivis.get( random.nextInt(estadosCivis.size()) ) );
-			descricao.setGastoViagem( gastosViagem.get( random.nextInt(gastosViagem.size()) ) );
-			descricao.setHospedagem( hospedagens.get( random.nextInt(hospedagens.size()) ) );
-			descricao.setLocalTrabalho( locaisTrabalho.get( random.nextInt(locaisTrabalho.size()) ) );
-			descricao.setMeioTransporte( meiosTransporte.get( random.nextInt(meiosTransporte.size()) ) );
-			descricao.setPeriodicidadeVisita( periodicidadesVisita.get( random.nextInt(periodicidadesVisita.size()) ) );
-			descricao.setTempoEstadia( temposEstadia.get( random.nextInt(temposEstadia.size()) ) );
-			descricao.setTransporteEvento( transportesEvento.get( random.nextInt(transportesEvento.size()) ) );
-			descricao.setSexo( Sexo.values()[ random.nextInt(2) ] );
-			
+			descricao.setRendaMensal(1000 + random.nextFloat() * (7000 - 1000)); // R$1000
+																					// e
+																					// R$7000
+			descricao.setIdade(18 + random.nextInt(62));
+			// descricao.setCoordenada(destinoAleatorio.get(random.nextInt(destinoAleatorio.size())).getCoordenada());
+			descricao.setAcompanhante(acompanhantes.get(random.nextInt(acompanhantes.size())));
+			descricao.setEscolaridade(escolaridades.get(random.nextInt(escolaridades.size())));
+			descricao.setEstadoCivil(estadosCivis.get(random.nextInt(estadosCivis.size())));
+			descricao.setGastoViagem(gastosViagem.get(random.nextInt(gastosViagem.size())));
+			descricao.setHospedagem(hospedagens.get(random.nextInt(hospedagens.size())));
+			descricao.setLocalTrabalho(locaisTrabalho.get(random.nextInt(locaisTrabalho.size())));
+			descricao.setMeioTransporte(meiosTransporte.get(random.nextInt(meiosTransporte.size())));
+			descricao.setPeriodicidadeVisita(periodicidadesVisita.get(random.nextInt(periodicidadesVisita.size())));
+			descricao.setTempoEstadia(temposEstadia.get(random.nextInt(temposEstadia.size())));
+			descricao.setTransporteEvento(transportesEvento.get(random.nextInt(transportesEvento.size())));
+			descricao.setSexo(Sexo.values()[random.nextInt(2)]);
+
 			// recomendacao
 			Recomendacao r = new Recomendacao();
 			r.setDescricao(descricao);
-			
+
 			RoteiroTuristico solucao = new RoteiroTuristico();
-			//solucao.setAtrativos( atrativoDAO.getNeighborhood(descricao.getCoordenada(), 20000 , 5 + random.nextInt(15)) ); // 20km
+			solucao.setAtrativos(atrativoDAO.getNeighborhood(descricao.getCoordenada(), 20000, 5 + random.nextInt(15))); // 20km
 			r.setSolucao(solucao);
-			
-			recomendacaoDAO.insert(r);
+
+			recomendacaoDAO.save(r);
 		}
 	}
 }

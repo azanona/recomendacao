@@ -1,28 +1,30 @@
 package br.com.zanona.tcc.server.business;
 
-import javax.inject.Inject;
+import java.io.Serializable;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import br.com.zanona.tcc.server.domain.Perfil;
 import br.com.zanona.tcc.server.domain.Recomendacao;
 import br.com.zanona.tcc.server.rbc.RecomendacaoCore;
-import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 
-@BusinessController
-public class RecomendacaoBC  {
+@Component
+public class RecomendacaoBC implements Serializable {
 
 	private static final long serialVersionUID = 3965362815931539387L;
 
-	@Inject
-	private Logger logger;
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Inject
 	private RecomendacaoCore cbrCore;
 
-	
 	/**
-	 * Este método executa o ciclo de RBC para efetuar a sugestão dos atrativos turísticos 
+	 * Este método executa o ciclo de RBC para efetuar a sugestão dos atrativos
+	 * turísticos
+	 * 
 	 * @param perfil
 	 * @return
 	 * @throws RuntimeException
@@ -32,13 +34,13 @@ public class RecomendacaoBC  {
 		Recomendacao recomendacao = null;
 
 		try {
-			
+
 			// carregando base de casos
 			cbrCore.preCycle();
 
 			// executando a consulta
-			recomendacao = cbrCore.execCycle(perfil) ;
-			
+			recomendacao = cbrCore.execCycle(perfil);
+
 			// finalizando ciclo
 			cbrCore.postCycle();
 
@@ -53,13 +55,13 @@ public class RecomendacaoBC  {
 	}
 
 	/**
-	 *  Método que efetua o aprendizado de um caso qualquer na base de casos.
-	 *  Esta recomendação pode ter vindo do ciclo do rbc ou não.
+	 * Método que efetua o aprendizado de um caso qualquer na base de casos.
+	 * Esta recomendação pode ter vindo do ciclo do rbc ou não.
+	 * 
 	 * @param recomendacao
 	 */
-	public void aprender( Recomendacao recomendacao ) {
+	public void aprender(Recomendacao recomendacao) {
 		cbrCore.learn(recomendacao);
 	}
-	
-	
+
 }

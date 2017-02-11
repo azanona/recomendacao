@@ -13,12 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.Type;
-
-import br.com.zanona.tcc.server.rest.jackson.GeometryDeserializer;
-import br.com.zanona.tcc.server.rest.jackson.GeometrySerializer;
 
 import com.vividsolutions.jts.geom.Geometry;
 
@@ -47,12 +42,12 @@ public class AtrativoTuristico implements Serializable {
 
 	public AtrativoTuristico() {}
 		
-	@JsonSerialize(using=GeometrySerializer.class)
+//	@JsonSerialize(using=GeometrySerializer.class)
 	public Geometry getCoordenada() {
 		return coordenada;
 	}
 	
-	@JsonDeserialize(using=GeometryDeserializer.class)
+//	@JsonDeserialize(using=GeometryDeserializer.class)
 	public void setCoordenada(Geometry coordenada) {
 		this.coordenada = coordenada;
 	}

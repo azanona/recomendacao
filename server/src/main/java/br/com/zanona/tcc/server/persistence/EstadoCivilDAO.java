@@ -1,12 +1,12 @@
 package br.com.zanona.tcc.server.persistence;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
 import br.com.zanona.tcc.server.domain.EstadoCivil;
-import br.gov.frameworkdemoiselle.stereotype.PersistenceController;
-import br.gov.frameworkdemoiselle.template.JPACrud;
 
-@PersistenceController
-public class EstadoCivilDAO extends JPACrud<EstadoCivil, Integer> {
+@Repository
+public interface EstadoCivilDAO extends JpaRepository<EstadoCivil, Integer> {
 
-	private static final long serialVersionUID = -7310011265249904729L;
 
 }

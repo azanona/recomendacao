@@ -1,12 +1,12 @@
 package br.com.zanona.tcc.server.persistence;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
 import br.com.zanona.tcc.server.domain.TransporteEvento;
-import br.gov.frameworkdemoiselle.stereotype.PersistenceController;
-import br.gov.frameworkdemoiselle.template.JPACrud;
 
-@PersistenceController
-public class TransporteEventoDAO extends JPACrud<TransporteEvento, Integer> {
+@Repository
+public interface TransporteEventoDAO extends JpaRepository<TransporteEvento, Integer> {
 
-	private static final long serialVersionUID = -3733645180287302162L;
 
 }

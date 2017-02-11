@@ -4,44 +4,36 @@ import java.io.Serializable;
 import java.net.URL;
 import java.util.Collection;
 
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import org.hibernate.Session;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.vividsolutions.jts.geom.Geometry;
+
+import br.com.zanona.tcc.server.domain.Perfil;
+import br.com.zanona.tcc.server.domain.Recomendacao;
+import br.com.zanona.tcc.server.domain.RoteiroTuristico;
 import jcolibri.cbrcore.CBRCase;
 import jcolibri.cbrcore.CaseBaseFilter;
 import jcolibri.cbrcore.Connector;
 import jcolibri.exception.InitializingException;
 
-import org.hibernate.Session;
-import org.slf4j.Logger;
 
-import br.com.zanona.tcc.server.domain.Perfil;
-import br.com.zanona.tcc.server.domain.Recomendacao;
-import br.com.zanona.tcc.server.domain.RoteiroTuristico;
-import br.gov.frameworkdemoiselle.stereotype.PersistenceController;
-import br.gov.frameworkdemoiselle.transaction.Transactional;
-
-import com.vividsolutions.jts.geom.Geometry;
-
-
-@PersistenceController
 public class RecomendacaoConnector implements Connector, Serializable {
 
 	private static final long serialVersionUID = -3319316842861913591L;
 
-	@Inject
 	private EntityManager entityManager;
 	
-	@Inject
-	private Logger logger;
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	private Integer count = 0;
 
 	/**
 	 * Método que remove todos os casos passados por parametro.
 	 */
 	@Override
-	@Transactional
 	public void deleteCases(Collection<CBRCase> colecao) {
 		if (colecao != null && !colecao.isEmpty()) {
 			logger.debug("deleteCases inicio");
@@ -79,7 +71,6 @@ public class RecomendacaoConnector implements Connector, Serializable {
 	 * Método que armazena todos os casos passados por parametros.
 	 */
 	@Override
-	@Transactional
 	public void storeCases(Collection<CBRCase> colecao) {
 		if (colecao != null && !colecao.isEmpty()) {
 			logger.debug("storeCases inicio");

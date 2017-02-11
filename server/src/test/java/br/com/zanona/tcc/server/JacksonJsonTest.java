@@ -1,24 +1,22 @@
 package br.com.zanona.tcc.server;
 
-import javax.inject.Inject;
-
-import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.zanona.tcc.server.domain.AtrativoTuristico;
 import br.com.zanona.tcc.server.domain.Perfil;
 import br.com.zanona.tcc.server.persistence.AtrativoTuristicoDAO;
-import br.gov.frameworkdemoiselle.junit.DemoiselleRunner;
 
-@RunWith(DemoiselleRunner.class)
+//@RunWith(DemoiselleRunner.class)
 public class JacksonJsonTest {
 
-	@Inject
+	@Autowired
 	private Logger logger;
 	
-	@Inject
+	@Autowired
 	private AtrativoTuristicoDAO atrativoDAO;
 	
 	@Test
@@ -26,7 +24,7 @@ public class JacksonJsonTest {
 
 		try {
 
-			AtrativoTuristico at = atrativoDAO.load(1); 
+			AtrativoTuristico at = atrativoDAO.findOne(1); 
 			ObjectMapper oMapper = new ObjectMapper();
 			String outputChild1 = oMapper.writeValueAsString(at);
 			logger.debug(outputChild1);

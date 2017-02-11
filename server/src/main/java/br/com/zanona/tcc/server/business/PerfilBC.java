@@ -4,10 +4,11 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import br.com.zanona.tcc.server.domain.Acompanhante;
-import br.com.zanona.tcc.server.domain.BaseDomain;
 import br.com.zanona.tcc.server.domain.Escolaridade;
 import br.com.zanona.tcc.server.domain.EstadoCivil;
 import br.com.zanona.tcc.server.domain.GastoViagem;
@@ -28,45 +29,45 @@ import br.com.zanona.tcc.server.persistence.MeioTransporteDAO;
 import br.com.zanona.tcc.server.persistence.PeriodicidadeVisitaDAO;
 import br.com.zanona.tcc.server.persistence.TempoEstadiaDAO;
 import br.com.zanona.tcc.server.persistence.TransporteEventoDAO;
-import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 
-@BusinessController
+@Component
 public class PerfilBC implements Serializable {
 
 	private static final long serialVersionUID = -2887240428592023876L;
 
-	@Inject
+	@Autowired
 	private EscolaridadeDAO escolaridadeDAO;
 
-	@Inject
+	
 	private LocalTrabalhoDAO localTrabalhoDAO;
 
-	@Inject
+	
 	private EstadoCivilDAO estadoCivilDAO;
 
-	@Inject
+	
 	private GastoViagemDAO gastoViagemDAO;
 
-	@Inject
+	
 	private AcompanhanteDAO acompanhanteDAO;
 
-	@Inject
+	
 	private HospedagemDAO hospedagemDAO;
 
-	@Inject
+	
 	private TransporteEventoDAO transporteventoDAO;
 
-	@Inject
+	
 	private MeioTransporteDAO meioTransporteDAO;
 
-	@Inject
+	
 	private PeriodicidadeVisitaDAO periodicidadeVisitaDAO;
 
-	@Inject
+	
 	private TempoEstadiaDAO tempoEstadiaDAO;
 
 	public List<Escolaridade> buscarEscolaridades() {
-		return escolaridadeDAO.findAll();
+		escolaridadeDAO.findAll();
+		return Arrays.asList();
 	}
 
 	public List<LocalTrabalho> buscarLocaisTrabalho() {
@@ -106,7 +107,7 @@ public class PerfilBC implements Serializable {
 	}
 
 	public List<Sexo> buscarSexo() {
-		return Arrays.asList( Sexo.values() );
+		return Arrays.asList(Sexo.values());
 	}
 
 }

@@ -7,27 +7,6 @@
 		
 		<!-- Entidades App -->
 		
-		<class>br.com.zanona.tcc.server.domain.Acompanhante</class>
-		<class>br.com.zanona.tcc.server.domain.AtrativoTuristico</class>
-		<class>br.com.zanona.tcc.server.domain.Categoria</class>
-		<class>br.com.zanona.tcc.server.domain.Escolaridade</class>
-		<class>br.com.zanona.tcc.server.domain.EstadoCivil</class>
-		<class>br.com.zanona.tcc.server.domain.GastoViagem</class>
-		
-		<class>br.com.zanona.tcc.server.domain.Hospedagem</class>
-		<class>br.com.zanona.tcc.server.domain.LocalTrabalho</class>
-		<class>br.com.zanona.tcc.server.domain.MeioTransporte</class>
-		<class>br.com.zanona.tcc.server.domain.Perfil</class>
-		<class>br.com.zanona.tcc.server.domain.PeriodicidadeVisita</class>
-		<class>br.com.zanona.tcc.server.domain.Recomendacao</class>
-		<class>br.com.zanona.tcc.server.domain.RoteiroTuristico</class>
-		<class>br.com.zanona.tcc.server.domain.TempoEstadia</class>
-		<class>br.com.zanona.tcc.server.domain.TransporteEvento</class>
-		
-		<!-- Configuracoes JPA2/Hibernate -->
-		
-		<properties>			
-		 
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
 			<property name="hibernate.default_schema" value="public" />
 			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/recomendacao" />

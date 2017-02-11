@@ -1,29 +1,24 @@
 package br.com.zanona.tcc.server;
 
-import java.util.List;
-
-import javax.inject.Inject;
-
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.zanona.tcc.server.business.PerfilBC;
 import br.com.zanona.tcc.server.business.RecomendacaoBC;
 import br.com.zanona.tcc.server.domain.Perfil;
 import br.com.zanona.tcc.server.domain.Recomendacao;
-import br.gov.frameworkdemoiselle.junit.DemoiselleRunner;
 
-@RunWith(DemoiselleRunner.class)
+//@RunWith(DemoiselleRunner.class)
 public class RecomendacaoTest {
  
-	@Inject
+	@Autowired
 	private RecomendacaoBC recomBC;
 
-	@Inject
+	@Autowired
 	private PerfilBC perfilBC;
 	
-	@Inject
+	@Autowired
 	private Logger log;
 	
 	@Test
