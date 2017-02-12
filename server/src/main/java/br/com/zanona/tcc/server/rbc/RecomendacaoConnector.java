@@ -64,6 +64,7 @@ public class RecomendacaoConnector implements Connector, Serializable {
 	/**
 	 * Método que recupera todos os casos da base.
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<CBRCase> retrieveAllCases() {
 		logger.debug("retreive all cases");

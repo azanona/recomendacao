@@ -19,7 +19,7 @@ public class AtrativoTuristicoDAO implements Serializable {
 
 	private static final long serialVersionUID = 4325708187005429639L;
 
-//	@PersistenceContext
+	@PersistenceContext
     private EntityManager manager;
 	
 	public Integer count() {
@@ -40,6 +40,7 @@ public class AtrativoTuristicoDAO implements Serializable {
 	 * @param distanciaMaxima
 	 * @param referencia
 	 */
+	@SuppressWarnings("unchecked")
 	public List<AtrativoTuristico> getNeighborhood(Geometry referencia, Integer distanciaMaxima, Integer maxAtrativos) {
 
 		Session s = (Session) getEntityManager().getDelegate();

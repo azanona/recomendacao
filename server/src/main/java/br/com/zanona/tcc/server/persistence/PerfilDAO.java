@@ -7,7 +7,6 @@ import javax.persistence.PersistenceContext;
 
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
 
 import br.com.zanona.tcc.server.domain.Perfil;
@@ -17,7 +16,7 @@ public class PerfilDAO implements Serializable {
 
 	private static final long serialVersionUID = -467567589910185430L;
 	
-//	@PersistenceContext
+	@PersistenceContext
 	private EntityManager entityManager;
 
 	public Integer getNeighborhood(Perfil perfil, Integer distanciaMaxima) {

@@ -4,7 +4,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.zanona.tcc.server.business.PerfilBC;
 import br.com.zanona.tcc.server.business.RecomendacaoBC;
 import br.com.zanona.tcc.server.domain.Perfil;
 import br.com.zanona.tcc.server.domain.Recomendacao;
@@ -15,9 +14,6 @@ public class RecomendacaoTest {
 	@Autowired
 	private RecomendacaoBC recomBC;
 
-	@Autowired
-	private PerfilBC perfilBC;
-	
 	@Autowired
 	private Logger log;
 	

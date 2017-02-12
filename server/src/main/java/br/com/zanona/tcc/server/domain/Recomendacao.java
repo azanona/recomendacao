@@ -13,9 +13,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import jcolibri.cbrcore.CBRCase;
-import jcolibri.cbrcore.CaseComponent;
-
 @Entity
 @Table(name = "recomendacao")
 @SequenceGenerator(name = "seq_recomendacao", sequenceName = "seq_recomendacao", allocationSize = 1)

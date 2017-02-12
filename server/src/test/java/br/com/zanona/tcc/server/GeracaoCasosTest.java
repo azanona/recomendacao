@@ -9,7 +9,6 @@ import java.util.Random;
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.zanona.tcc.server.domain.Acompanhante;
@@ -43,9 +42,6 @@ import br.com.zanona.tcc.server.persistence.TransporteEventoDAO;
 
 //@RunWith(DemoiselleRunner.class)
 public class GeracaoCasosTest {
-
-	@Autowired
-	private Logger log;
 
 	private String[] nomesAleatorios;
 
@@ -122,8 +118,8 @@ public class GeracaoCasosTest {
 	@Before
 	public void init() throws Exception {
 		nomesAleatorios = carregarNomes("/nomes-aleatorios");
-		// destinoAleatorio = carregarDestinos(nomesAleatorios.length);
-//		escolaridades = escolaridadeDAO.findAll();
+		destinoAleatorio = carregarDestinos(nomesAleatorios.length);
+		escolaridades = escolaridadeDAO.findAll();
 		locaisTrabalho = localTrabalhoDAO.findAll();
 		estadosCivis = estadoCivilDAO.findAll();
 		gastosViagem = gastoViagemDAO.findAll();
@@ -166,7 +162,7 @@ public class GeracaoCasosTest {
 																					// e
 																					// R$7000
 			descricao.setIdade(18 + random.nextInt(62));
-			// descricao.setCoordenada(destinoAleatorio.get(random.nextInt(destinoAleatorio.size())).getCoordenada());
+			descricao.setCoordenada(destinoAleatorio.get(random.nextInt(destinoAleatorio.size())).getCoordenada());
 			descricao.setAcompanhante(acompanhantes.get(random.nextInt(acompanhantes.size())));
 			descricao.setEscolaridade(escolaridades.get(random.nextInt(escolaridades.size())));
 			descricao.setEstadoCivil(estadosCivis.get(random.nextInt(estadosCivis.size())));
