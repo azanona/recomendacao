@@ -37,7 +37,6 @@ public class AtrativoTuristico implements Serializable {
 	private Categoria categoria;
 
 	@Column(name = "att_coordenada", nullable = true)
-	@Type(type = "org.hibernatespatial.GeometryUserType")
 	private Geometry coordenada;
 
 	public AtrativoTuristico() {}

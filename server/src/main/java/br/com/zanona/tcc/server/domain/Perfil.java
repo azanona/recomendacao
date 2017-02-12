@@ -36,7 +36,6 @@ public class Perfil implements CaseComponent, Serializable {
 	private String nome;
 
 	@Column(name = "per_coordenada", nullable = true)
-	@Type(type = "org.hibernatespatial.GeometryUserType")
 	private Geometry coordenada;
 
 	@Column(name = "per_sexo")
