@@ -133,7 +133,7 @@ public class GeracaoCasosTest {
 
 	private List<AtrativoTuristico> carregarDestinos(Integer numDestinos) {
 		List<AtrativoTuristico> lista = new ArrayList<AtrativoTuristico>();
-		Integer total = atrativoDAO.count();
+		Integer total = (int)atrativoDAO.count();
 		Integer distanciaMinima = 0;
 		Integer distanciaMaxima = 10000;
 		Integer totalMinimoVizinhos = 20;

@@ -1,13 +1,12 @@
 package br.com.zanona.tcc.server.persistence;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.vividsolutions.jts.geom.Geometry;
@@ -15,22 +14,13 @@ import com.vividsolutions.jts.geom.Geometry;
 import br.com.zanona.tcc.server.domain.AtrativoTuristico;
 
 @Repository
-public class AtrativoTuristicoDAO implements Serializable {
+public class AtrativoTuristicoDAO extends SimpleJpaRepository<AtrativoTuristico, Long> {
 
-	private static final long serialVersionUID = 4325708187005429639L;
+	private EntityManager manager;
 
-	@PersistenceContext
-    private EntityManager manager;
-	
-	public Integer count() {
-		Number total = (Number) getEntityManager()
-				.createQuery("select count(this.id) from " + AtrativoTuristico.class.getName() + " this")
-				.getSingleResult();
-		return total.intValue();
-	}
-
-	private EntityManager getEntityManager() {
-		return manager;
+	public AtrativoTuristicoDAO(EntityManager em) {
+		super(AtrativoTuristico.class, em);
+		this.manager = em;
 	}
 
 	/**
@@ -43,7 +33,7 @@ public class AtrativoTuristicoDAO implements Serializable {
 	@SuppressWarnings("unchecked")
 	public List<AtrativoTuristico> getNeighborhood(Geometry referencia, Integer distanciaMaxima, Integer maxAtrativos) {
 
-		Session s = (Session) getEntityManager().getDelegate();
+		Session s = (Session) manager.getDelegate();
 		SQLQuery q = s.createSQLQuery(
 				"	select att_id , att_cat_id , att_coordenada , att_nome " + " from atrativo_turistico " + "	where "
 						+ "		st_distance( " + "			ST_GeomFromText(:coordenada,4326) , "
@@ -67,7 +57,7 @@ public class AtrativoTuristicoDAO implements Serializable {
 	 */
 	public Integer getNeighborhood(AtrativoTuristico atrativo, Integer distanciaMinima, Integer distanciaMaxima) {
 
-		Session s = (Session) getEntityManager().getDelegate();
+		Session s = (Session) manager.getDelegate();
 		SQLQuery q = s.createSQLQuery("select count(att_id) from (" + "	select att_id , " + "		st_distance( "
 				+ "			ST_GeomFromText(:coordenada,4326) , " + "			att_coordenada, " + "			true "
 				+ "		) as distancia " + "	from atrativo_turistico " + "	where att_id <> :id " + ") a "
@@ -81,11 +71,7 @@ public class AtrativoTuristicoDAO implements Serializable {
 	}
 
 	public AtrativoTuristico findOne(Integer proxId) {
-		return getEntityManager().find(AtrativoTuristico.class, proxId);
-	}
-
-	public void save(AtrativoTuristico att) {
-		getEntityManager().merge(att);
+		return manager.find(AtrativoTuristico.class, proxId);
 	}
 
 }

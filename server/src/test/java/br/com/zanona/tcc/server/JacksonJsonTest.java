@@ -12,22 +12,15 @@ import br.com.zanona.tcc.server.persistence.AtrativoTuristicoDAO;
 
 //@RunWith(DemoiselleRunner.class)
 public class JacksonJsonTest {
-
-	@Autowired
-	private Logger logger;
-	
-	@Autowired
-	private AtrativoTuristicoDAO atrativoDAO;
 	
 	@Test
 	public void serializar() {
 
 		try {
 
-			AtrativoTuristico at = atrativoDAO.findOne(1); 
+			AtrativoTuristico at = new AtrativoTuristico(); 
 			ObjectMapper oMapper = new ObjectMapper();
 			String outputChild1 = oMapper.writeValueAsString(at);
-			logger.debug(outputChild1);
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -45,7 +38,6 @@ public class JacksonJsonTest {
 		
 			//AtrativoTuristico inputChild1 = oMapper.readValue("{\"coordenada\":\"POINT (-27 -43)\"}", AtrativoTuristico.class);
 			Perfil p = oMapper.readValue("{\"coordenada\":\"POINT (-27 -43)\" ,\"categoria\": { \"id\" : 108 } }", Perfil.class);
-			logger.debug(p.toString());
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();

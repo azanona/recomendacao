@@ -13,7 +13,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.vividsolutions.jts.geom.Geometry;
+
+import br.com.zanona.tcc.server.rest.jackson.GeometryDeserializer;
+import br.com.zanona.tcc.server.rest.jackson.GeometrySerializer;
 
 @Entity
 @Table(name = "atrativo_turistico")
@@ -39,12 +44,12 @@ public class AtrativoTuristico implements Serializable {
 
 	public AtrativoTuristico() {}
 		
-//	@JsonSerialize(using=GeometrySerializer.class)
+	@JsonSerialize(using=GeometrySerializer.class)
 	public Geometry getCoordenada() {
 		return coordenada;
 	}
 	
-//	@JsonDeserialize(using=GeometryDeserializer.class)
+	@JsonDeserialize(using=GeometryDeserializer.class)
 	public void setCoordenada(Geometry coordenada) {
 		this.coordenada = coordenada;
 	}
