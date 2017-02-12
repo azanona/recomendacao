@@ -5,8 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Controller;
 
 import br.com.zanona.tcc.server.domain.Acompanhante;
 import br.com.zanona.tcc.server.domain.Escolaridade;
@@ -30,7 +29,7 @@ import br.com.zanona.tcc.server.persistence.PeriodicidadeVisitaDAO;
 import br.com.zanona.tcc.server.persistence.TempoEstadiaDAO;
 import br.com.zanona.tcc.server.persistence.TransporteEventoDAO;
 
-@Component
+@Controller
 public class PerfilBC implements Serializable {
 
 	private static final long serialVersionUID = -2887240428592023876L;
@@ -38,36 +37,35 @@ public class PerfilBC implements Serializable {
 	@Autowired
 	private EscolaridadeDAO escolaridadeDAO;
 
-	
+	@Autowired
 	private LocalTrabalhoDAO localTrabalhoDAO;
 
-	
+	@Autowired
 	private EstadoCivilDAO estadoCivilDAO;
 
-	
+	@Autowired
 	private GastoViagemDAO gastoViagemDAO;
 
-	
+	@Autowired
 	private AcompanhanteDAO acompanhanteDAO;
 
-	
+	@Autowired
 	private HospedagemDAO hospedagemDAO;
 
-	
+	@Autowired
 	private TransporteEventoDAO transporteventoDAO;
 
-	
+	@Autowired
 	private MeioTransporteDAO meioTransporteDAO;
 
-	
+	@Autowired
 	private PeriodicidadeVisitaDAO periodicidadeVisitaDAO;
 
-	
+	@Autowired
 	private TempoEstadiaDAO tempoEstadiaDAO;
 
 	public List<Escolaridade> buscarEscolaridades() {
-		escolaridadeDAO.findAll();
-		return Arrays.asList();
+		return escolaridadeDAO.findAll();
 	}
 
 	public List<LocalTrabalho> buscarLocaisTrabalho() {

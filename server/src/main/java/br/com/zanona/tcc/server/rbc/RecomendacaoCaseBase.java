@@ -3,19 +3,19 @@ package br.com.zanona.tcc.server.rbc;
 import java.io.Serializable;
 import java.util.Collection;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jcolibri.casebase.CachedLinealCaseBase;
 import jcolibri.cbrcore.CBRCase;
 import jcolibri.exception.InitializingException;
+
 @Component
 public class RecomendacaoCaseBase extends CachedLinealCaseBase implements Serializable {
 	
 	private static final long serialVersionUID = 8806540865369424000L;
 
+	@Autowired
 	private RecomendacaoConnector connector;
 		
 	/**

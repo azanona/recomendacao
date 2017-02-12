@@ -6,19 +6,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
 import br.com.zanona.tcc.server.domain.Perfil;
 import br.com.zanona.tcc.server.domain.Recomendacao;
 import br.com.zanona.tcc.server.rbc.RecomendacaoCore;
 
-@Component
+@Controller
 public class RecomendacaoBC implements Serializable {
 
 	private static final long serialVersionUID = 3965362815931539387L;
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+	@Autowired
 	private RecomendacaoCore cbrCore;
 
 	/**

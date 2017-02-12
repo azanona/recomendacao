@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 import br.com.zanona.tcc.server.domain.Perfil;
 import br.com.zanona.tcc.server.domain.Recomendacao;
@@ -26,11 +27,12 @@ import jcolibri.method.retrieve.NNretrieval.similarity.local.Interval;
 import jcolibri.method.retrieve.selection.SelectCases;
 import jcolibri.method.reuse.CombineQueryAndCasesMethod;
 
-@Component
+@Controller
 public class RecomendacaoCore implements StandardCBRApplication {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+	@Autowired
 	private RecomendacaoCaseBase caseBase;
 
 	/**

@@ -3,11 +3,13 @@ package br.com.zanona.tcc.server.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import br.com.zanona.tcc.server.business.RecomendacaoBC;
 import br.com.zanona.tcc.server.domain.Perfil;
 import br.com.zanona.tcc.server.domain.Recomendacao;
 
+@RestController
 public class RecomendacaoService {
 
 	@Autowired

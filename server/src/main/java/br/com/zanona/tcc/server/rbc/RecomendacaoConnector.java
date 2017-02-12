@@ -5,10 +5,12 @@ import java.net.URL;
 import java.util.Collection;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import com.vividsolutions.jts.geom.Geometry;
 
@@ -20,11 +22,12 @@ import jcolibri.cbrcore.CaseBaseFilter;
 import jcolibri.cbrcore.Connector;
 import jcolibri.exception.InitializingException;
 
-
+@Component
 public class RecomendacaoConnector implements Connector, Serializable {
 
 	private static final long serialVersionUID = -3319316842861913591L;
 
+	@PersistenceContext
 	private EntityManager entityManager;
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
