@@ -1,0 +1,36 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>br.com.zanona.tcc</groupId>
+	<artifactId>json-jts</artifactId>
+	<version>1.0.0</version>
+
+	<properties>
+		<com.fasterxml.jackson.version>2.8.6</com.fasterxml.jackson.version>
+		<com.vividsolutions.jts.version>1.13</com.vividsolutions.jts.version>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${com.fasterxml.jackson.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${com.fasterxml.jackson.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.vividsolutions</groupId>
+			<artifactId>jts</artifactId>
+			<version>${com.vividsolutions.jts.version}</version>
+		</dependency>
+
+
+	</dependencies>
+
+</project>
