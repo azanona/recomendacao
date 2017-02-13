@@ -1,4 +1,4 @@
 recomendacao
 ============
 
-Projeto de especialição onde aplicou-se os padrões de projeto proposto por Balaile, 2015.
+Projeto de especialização aplicando os padrões de projeto para microserviços por Balaile, 2015.
