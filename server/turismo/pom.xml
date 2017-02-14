@@ -36,49 +36,6 @@
 			<artifactId>spring-cloud-starter-eureka</artifactId>
 		</dependency>
 		
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<!-- Hibernate Spatial -->
-
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-spatial</artifactId>
-			<version>5.0.11.Final</version>
-		</dependency>
-
-		<!-- JDBC -->
-		<dependency>
-			<groupId>postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>8.4-702.jdbc4</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.postgis</groupId>
-			<artifactId>postgis-jdbc</artifactId>
-			<version>1.5.2</version>
-		</dependency>
-
-		<!-- Utilitarios -->
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>br.com.zanona.tcc</groupId>
-			<artifactId>json-jts</artifactId>
-			<version>1.0.0</version>
-		</dependency>
 
 	</dependencies>
 
@@ -102,13 +59,6 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<repositories>
-		<repository>
-			<id>Hibernate Spatial repo</id>
-			<url>http://www.hibernatespatial.org/repository</url>
-		</repository>
-	</repositories>
 
 	<organization>
 		<name>Arthur F. Zanona</name>
