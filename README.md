@@ -1,4 +1,4 @@
 recomendacao
 ============
 
-Sistema de Recomendação usando Demoiselle, RestEasy, JColibri e Hibernate Spatial
+Projeto de especialização aplicando os padrões de projeto para microserviços por Balaile, 2015.
